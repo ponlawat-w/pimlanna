@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ᨻᩥ᩠ᨾᩃ᩶ᩣ᩠ᨶᨶᩣ - pimlanna</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://unpkg.com/vue@2.6.12/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/axios@0.21.1/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container mt-5" :class="globalClass">
+        <div class="text-right">
+          <a lang="nod" @click="setLanguage('nod');" href="#">ᩃ᩶ᩣ᩠ᨶᨶᩣ</a> |
+          <a lang="th" @click="setLanguage('th');" href="#">ภาษาไทย</a> |
+          <a lang="en" @click="setLanguage('en');" href="#">English</a>
+        </div>
+        <div class="input-group">
+          <span :lang="language" class="input-group-text">{{str('keyboard')}}</span>
+          <select class="form-control" v-model="keyboard">
+            <option value="th">ภาษาไทย แป้นพิมพ์เกษมณี</option>
+            <option value="en">English (International) Keyboard</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <span :lang="language" class="input-group-text">{{str('font')}}</span>
+          <select class="form-control" v-model="currentFontCode">
+            <option v-for="(font, code) in fonts" :value="code">{{code}} - {{font.name}}</option>
+          </select>
+        </div>
+        <textarea lang="nod" class="form-control w-100"
+          @keydown="keydown" @keyup="keyup" @keypress="keypress"
+          id="main-textarea" autofocus></textarea>
+        <nav class="navbar bar">
+          <div class="container" :lang="language">
+            <button type="button" @click="special();" class="btn" :class="specialBtnClass">{{str('special')}}</button>
+            <button type="button" @click="sakot();" class="btn btn-lg" :class="sakotBtnClass">{{str('sakot')}}</button>
+            <button type="button" @click="copy();" class="btn btn-success">{{str('copy')}}</button>
+          </div>
+        </nav>
+        <nav class="navbar fixed-bottom">
+          <div class="text-right w-100">
+            <a :lang="language" href="https://github.com/ponlawat-w/pimlanna" target="_blank">{{str('github')}}</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

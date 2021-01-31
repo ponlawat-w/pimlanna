@@ -1,0 +1,11 @@
+{
+  "ATaiThamKHNewV3": {"name": "A-Tai-Tham-KH-New-V3.ttf", "className": "font-a-taiv3"},
+  "CrInsomLanna": {"name": "CR_Insom_Lanna.ttf", "className": "font-cr-lann"},
+  "CrInsomLannaBold": {"name": "CR_Insom_Lanna-Bold.ttf", "className": "font-cr-lann-bold"},
+  "CrInsomPali": {"name": "CR_Insom_Pali.ttf", "className": "font-cr-pali"},
+  "uvSOVPaliKhottabun": {"name": "Pali_Khottabun.ttf", "className": "font-pali-khot"},
+  "uvSOVTilok": {"name": "Pali_Tilok.ttf", "className": "font-pali-tilok", "default": true},
+  "VSThamLanxang": {"name": "VS_Tham_Lanxang.ttf", "className": "font-vs-lanx"},
+  "VSThamLanxangBold": {"name": "VS_Tham_Lanxang-Bold.ttf", "className": "font-vs-lanx-bold"},
+  "VSThamLanxangPali": {"name": "VS_Tham_Pali.ttf", "className": "font-vs-lanx-pali"}
+}

@@ -1,0 +1,35 @@
+{
+  "nod": {
+    "lang": "nod",
+    "strings": {
+      "keyboard": "ᨸᩯ᩠᩶ᨶᨻᩥ᩠ᨾᨻ᩺",
+      "font": "ᨼᩬᩁ᩠ᨲ᩺",
+      "special": "ᨲᩢ᩠ᩅᨻᩥᩆᩮ᩠ᩇ",
+      "sakot": "ᨲᩢ᩠ᩅᩈᨠᩫ᩠ᨯ",
+      "copy": "ᨣᩢ᩠ᨯᩃᩬᨠ",
+      "github": "ᨹᩬ᩵ᨠᩥ᩠ᨴᩉᩢ᩠ᨷ"
+    }
+  },
+  "th": {
+    "lang": "th",
+    "strings": {
+      "keyboard": "แป้นพิมพ์",
+      "font": "ฟอนต์",
+      "special": "ตัวพิเศษ",
+      "sakot": "ตัวสะกด",
+      "copy": "คัดลอก",
+      "github": "ไปยังกิทฮับ"
+    }
+  },
+  "en": {
+    "lang": "en",
+    "strings": {
+      "keyboard": "Keyboard",
+      "font": "Font",
+      "special": "Alternate",
+      "sakot": "Final Cons.",
+      "copy": "Copy",
+      "github": "Go to GitHub"
+    }
+  }
+}

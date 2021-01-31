@@ -1,0 +1,93 @@
+@font-face {
+  font-family: ATaiThamKHNewV3;
+  src: url(./fonts/A-Tai-Tham-KH-New-V3.ttf)
+}
+@font-face {
+  font-family: CrInsomLanna;
+  src: url(./fonts/CR_Insom_Lanna.ttf)
+}
+@font-face {
+  font-family: CrInsomLannaBold;
+  src: url(./fonts/CR_Insom_Lanna-Bold.ttf)
+}
+@font-face {
+  font-family: CrInsomPali;
+  src: url(./fonts/CR_Insom_Pali.ttf)
+}
+@font-face {
+  font-family: uvSOVPaliKhottabun;
+  src: url(./fonts/Pali_Khottabun.ttf)
+}
+@font-face {
+  font-family: uvSOVTilok;
+  src: url(./fonts/Pali_Tilok.ttf)
+}
+@font-face {
+  font-family: VSThamLanxang;
+  src: url(./fonts/VS_Tham_Lanxang.ttf)
+}
+@font-face {
+  font-family: VSThamLanxangBold;
+  src: url(./fonts/VS_Tham_Lanxang-Bold.ttf)
+}
+@font-face {
+  font-family: VSThamLanxangPali;
+  src: url(./fonts/VS_Tham_Pali.ttf)
+}
+
+.font-a-taiv3 [lang=nod] {
+  font-family: ATaiThamKHNewV3;
+}
+.font-cr-lann [lang=nod] {
+  font-family: CrInsomLanna;
+}
+.font-cr-lann-bold [lang=nod] {
+  font-family: CrInsomLannaBold;
+}
+.font-cr-pali [lang=nod] {
+  font-family: CrInsomPali;
+}
+.font-pali-khot [lang=nod] {
+  font-family: uvSOVPaliKhottabun;
+}
+.font-pali-tilok [lang=nod] {
+  font-family: uvSOVTilok;
+}
+.font-vs-lanx [lang=nod] {
+  font-family: VSThamLanxang;
+}
+.font-vs-lanx-bold [lang=nod] {
+  font-family: VSThamLanxangBold;
+}
+.font-vs-lanx-pali [lang=nod] {
+  font-family: VSThamLanxangPali;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+body.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.dark {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+body.dark a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+body.dark #main-textarea {
+  background-color: #444444;
+  color: #ffffff;
+}
+
+#main-textarea {
+  font-size: 2em;
+  height: 40vh;
+}
