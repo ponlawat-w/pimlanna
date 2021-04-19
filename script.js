@@ -1,3 +1,5 @@
+const VERSION = '2564020101';
+
 new Vue({
   el: '#app',
   data: {
@@ -211,7 +213,7 @@ new Vue({
     
     this.loadKeys();
 
-    const thEnMappings = (await axios.get('./data/th-en-layout.csv')).data.split('\n')
+    const thEnMappings = (await axios.get('./data/th-en-layout.csv?v=' + VERSION)).data.split('\n')
       .filter(x => x).map(x => x.split(';').map(y => y.trim()))
       .filter(x => x.length === 2);
     for (let i = 0; i < thEnMappings.length; i++) {
