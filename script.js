@@ -101,7 +101,7 @@ new Vue({
       return false;
     },
     getCombiningKey: function(e) {
-      if (e.keyCode === 18 && e.location === 2) { // right alt
+      if ((e.keyCode === 18 || e.keyCode === 93) && e.location === 2) { // right alt or cmd
         return 'a';
       } else if (e.keyCode === 69) { // e
         return 'e';
@@ -109,7 +109,11 @@ new Vue({
       return null;
     },
     toKeyCode: function(code) {
-      return this.keyboard === 'th' ? this.thEnMappings[code] : code;
+      if (this.keyboard === 'th') {
+        return this.thEnMappings[code] ? this.thEnMappings[code] : code;
+      } else if (this.keyboard === 'en') {
+        return code;
+      }
     },
     clearKey: function() {
       this.combine = null;
@@ -118,6 +122,10 @@ new Vue({
     keydown: function(e) {
       if (this.combine) {
         e.preventDefault();
+        const key = this.toKeyCode(e.key.charCodeAt(0));
+        if (key) {
+          this.keys.push(key);
+        }
       } else {
         this.combine = this.getCombiningKey(e);
       }
@@ -139,11 +147,6 @@ new Vue({
           }
         }
         this.clearKey();
-      } else if (this.combine) {
-        const key = this.toKeyCode(e.key.charCodeAt(0));
-        if (key) {
-          this.keys.push(key);
-        }
       }
     },
     keypress: function(e) {
