@@ -7,7 +7,13 @@
       "special": "ᨲᩢ᩠ᩅᨻᩥᩆᩮ᩠ᩇ",
       "sakot": "ᨲᩢ᩠ᩅᩈᨠᩫ᩠ᨯ",
       "copy": "ᨣᩢ᩠ᨯᩃᩬᨠ",
-      "github": "ᨹᩬ᩵ᨠᩥ᩠ᨴᩉᩢ᩠ᨷ"
+      "github": "ᨹᩬ᩵ᨠᩥ᩠ᨴᩉᩢ᩠ᨷ",
+      "fontSizeSmall": "ᨲᩫ᩠ᩅᨶ᩶ᩬᨿ",
+      "fontSizeMedium": "ᨲᩫ᩠ᩅᨸᨠ᩠ᨲᩥ",
+      "fontSizeBig": "ᨲᩫ᩠ᩅᩉᩱ᩠ᨿ᩵",
+      "alignLeft": "ᨩᩥ᩠ᨯᨪ᩶ᩣ᩠ᨿ",
+      "alignCenter": "ᨲᨠ᩠ᩃᩣ᩠ᨦ",
+      "alignRight": "ᨩᩥ᩠ᨯᨡ᩠ᩅᩣ"
     }
   },
   "th": {
@@ -18,7 +24,13 @@
       "special": "ตัวพิเศษ",
       "sakot": "ตัวสะกด",
       "copy": "คัดลอก",
-      "github": "ไปยังกิทฮับ"
+      "github": "ไปยังกิทฮับ",
+      "fontSizeSmall": "ตัวเล็ก",
+      "fontSizeMedium": "ตัวปกติ",
+      "fontSizeBig": "ตัวใหญ่",
+      "alignLeft": "ชิดซ้าย",
+      "alignCenter": "ตรงกลาง",
+      "alignRight": "ชิดขวา"
     }
   },
   "en": {
@@ -29,7 +41,13 @@
       "special": "Alternate",
       "sakot": "Final Cons.",
       "copy": "Copy",
-      "github": "Go to GitHub"
+      "github": "Go to GitHub",
+      "fontSizeSmall": "Small",
+      "fontSizeMedium": "Medium",
+      "fontSizeBig": "Big",
+      "alignLeft": "Left",
+      "alignCenter": "Center",
+      "alignRight": "Right"
     }
   }
 }

@@ -1,4 +1,4 @@
-const VERSION = '2564020101';
+const VERSION = '2564042100';
 
 new Vue({
   el: '#app',
@@ -13,7 +13,9 @@ new Vue({
     keyMaps: {},
     keyOthers: [],
     combine: null,
-    keys: []
+    keys: [],
+    fontSize: '2em',
+    textAlign: 'left'
   },
   computed: {
     globalClass: function() {
@@ -38,6 +40,12 @@ new Vue({
     },
     sakotBtnClass: function() {
       return this.combine === 's' ? {'btn-danger': true} : {'btn-primary': true};
+    },
+    textAreaStyle: function() {
+      return {
+        'font-size': this.fontSize,
+        'text-align': this.textAlign
+      };
     }
   },
   methods: {
@@ -193,6 +201,24 @@ new Vue({
         this.combine = 'a';
       }
       this.getTextareaElement().focus();
+    },
+    setFontSize: function(newFontSize) {
+      this.fontSize = newFontSize;
+    },
+    setTextAlign: function(newTextAlign) {
+      this.textAlign = newTextAlign;
+    },
+    fontSizeClass: function(elementSize) {
+      return {
+        'btn-light': elementSize !== this.fontSize,
+        'btn-primary': elementSize === this.fontSize
+      }
+    },
+    textAlignClass: function(elementValue) {
+      return {
+        'btn-light': elementValue !== this.textAlign,
+        'btn-primary': elementValue === this.textAlign
+      }
     }
   },
   watch: {
@@ -204,12 +230,18 @@ new Vue({
     },
     currentFontCode: function() {
       localStorage.setItem('font', this.currentFontCode);
+    },
+    fontSize: function() {
+      localStorage.setItem('fontSize', this.fontSize);
+    },
+    textAlign: function() {
+      localStorage.setItem('textAlign', this.textAlign);
     }
   },
   mounted: async function() {
-    this.strings = (await axios.get('./data/strings.json')).data;
+    this.strings = (await axios.get('./data/strings.json?v=' + VERSION)).data;
 
-    this.fonts = (await axios.get('./data/fonts.json')).data;
+    this.fonts = (await axios.get('./data/fonts.json?v=' + VERSION)).data;
     
     this.loadKeys();
 
@@ -223,6 +255,8 @@ new Vue({
     const localStorageLanguage = localStorage.getItem('language');
     const localStorageKeyboard = localStorage.getItem('keyboard');
     const localStorageFont = localStorage.getItem('font');
+    const localStorageFontSize = localStorage.getItem('fontSize');
+    const localStorageTextAlign = localStorage.getItem('textAlign');
     if (localStorageLanguage) {
       this.setLanguage(localStorageLanguage);
     }
@@ -233,6 +267,12 @@ new Vue({
       this.currentFontCode = localStorageFont;
     } else {
       this.currentFontCode = Object.keys(this.fonts).filter(k => this.fonts[k].default)[0];
+    }
+    if (localStorageFontSize) {
+      this.fontSize = localStorageFontSize;
+    }
+    if (localStorageTextAlign) {
+      this.textAlign = localStorageTextAlign;
     }
 
     this.getTextareaElement().focus();
