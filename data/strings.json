@@ -2,24 +2,23 @@
   "nod": {
     "lang": "nod",
     "strings": {
-      "keyboard": "ᨸᩯ᩠᩶ᨶᨻᩥ᩠ᨾᨻ᩺",
-      "font": "ᨼᩬᩁ᩠ᨲ᩺",
-      "special": "ᨲᩢ᩠ᩅᨻᩥᩆᩮ᩠ᩇ",
-      "sakot": "ᨲᩢ᩠ᩅᩈᨠᩫ᩠ᨯ",
-      "copy": "ᨣᩢ᩠ᨯᩃᩬᨠ",
-      "github": "ᨹᩬ᩵ᨠᩥ᩠ᨴᩉᩢ᩠ᨷ",
-      "fontSizeSmall": "ᨲᩫ᩠ᩅᨶ᩶ᩬᨿ",
-      "fontSizeMedium": "ᨲᩫ᩠ᩅᨸᨠ᩠ᨲᩥ",
-      "fontSizeBig": "ᨲᩫ᩠ᩅᩉᩱ᩠ᨿ᩵",
+      "font": "ᨼ᩠ᩋᩁ᩠ᨲ᩺",
+      "special": "ᨲᩫ᩠ᩅᨻᩥᩆᩮ᩠ᩈ",
+      "sakot": "ᨲᩫ᩠ᩅᩈᨠᩫ᩠ᨯ",
+      "copy": "ᨣᩢ᩠ᨯᩃ᩠ᩋᨠ",
+      "github": "ᨹᩴ᩠᩵ᩋᨠᩥ᩠ᨴᩉᩢ᩠ᨷ",
+      "fontSizeSmall": "ᨲᩫ᩠ᩅᨶ᩠᩶ᨿ᩠ᩋ",
+      "fontSizeMedium": "ᨲᩫ᩠ᩅᨷ᩠ᨯᩣ᩠ᨿ",
+      "fontSizeBig": "ᨲᩫ᩠ᩅᩉ᩠ᩃᩅ᩠ᨦ",
       "alignLeft": "ᨩᩥ᩠ᨯᨪ᩶ᩣ᩠ᨿ",
-      "alignCenter": "ᨲᨠ᩠ᩃᩣ᩠ᨦ",
-      "alignRight": "ᨩᩥ᩠ᨯᨡ᩠ᩅᩣ"
+      "alignCenter": "ᩀᩪ᩵ᨠ᩠ᩃᩣ᩠ᨦ",
+      "alignRight": "ᨩᩥ᩠ᨯᨡ᩠ᩅᩣ",
+      "help": "ᩅᩥᨵᩦᨩᩲ᩶"
     }
   },
   "th": {
     "lang": "th",
     "strings": {
-      "keyboard": "แป้นพิมพ์",
       "font": "ฟอนต์",
       "special": "ตัวพิเศษ",
       "sakot": "ตัวสะกด",
@@ -30,13 +29,13 @@
       "fontSizeBig": "ตัวใหญ่",
       "alignLeft": "ชิดซ้าย",
       "alignCenter": "ตรงกลาง",
-      "alignRight": "ชิดขวา"
+      "alignRight": "ชิดขวา",
+      "help": "วิธีใช้"
     }
   },
   "en": {
     "lang": "en",
     "strings": {
-      "keyboard": "Keyboard",
       "font": "Font",
       "special": "Alternate",
       "sakot": "Final Cons.",
@@ -47,7 +46,8 @@
       "fontSizeBig": "Big",
       "alignLeft": "Left",
       "alignCenter": "Center",
-      "alignRight": "Right"
+      "alignRight": "Right",
+      "help": "Help"
     }
   }
 }
