@@ -6,5 +6,17 @@
   - **[CrInsomLanna](https://www.f0nt.com/release/cr_insom_lanna/)**
 - `Pali_Khottabun.ttf`, `Pali_Tilok.ttf`
   - **[uvSOV](https://www.f0nt.com/release/sov-tham/)**
+- `Pali_Tilok_Adjusted.ttf`
+  - Personally adjusted from `Pali_Tilok.ttf`, changes logged below.
 - `VS_Tham_Lanxang-Bold.ttf`, `VS_Tham_Lanxang.ttf`, `VS_Tham_Pali.ttf`
   - **[VSThamLanxang](https://www.f0nt.com/release/vs_tham_lanxang/)**
+
+---
+
+**`Pali_Tilok_Adjusted.ttf` changes log**
+- 8 August 2021
+  - RA glyph (edited `1A60`+`1A41`) (`1A55` is preferred)
+  - MAI KANG LAI ligatures (removed `1A26`+`1A60`) (`1A58` is preferred)
+  - OA ligatures (removed `1A60`+`1A4B`) (`1A6C` is preferred)
+
+---

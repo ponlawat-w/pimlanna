@@ -23,6 +23,10 @@
   src: url(./fonts/Pali_Tilok.ttf)
 }
 @font-face {
+  font-family: uvSOVTilokAdjusted;
+  src: url(./fonts/Pali_Tilok_Adjusted.ttf)
+}
+@font-face {
   font-family: VSThamLanxang;
   src: url(./fonts/VS_Tham_Lanxang.ttf)
 }
@@ -52,6 +56,9 @@
 }
 .font-pali-tilok [lang=nod] {
   font-family: uvSOVTilok;
+}
+.font-pali-tilok-adjusted [lang=nod] {
+  font-family: uvSOVTilokAdjusted;
 }
 .font-vs-lanx [lang=nod] {
   font-family: VSThamLanxang;
