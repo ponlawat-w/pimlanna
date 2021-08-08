@@ -5,7 +5,7 @@
   "CrInsomPali": {"name": "CR_Insom_Pali.ttf", "className": "font-cr-pali"},
   "uvSOVPaliKhottabun": {"name": "Pali_Khottabun.ttf", "className": "font-pali-khot"},
   "uvSOVTilok": {"name": "Pali_Tilok.ttf", "className": "font-pali-tilok"},
-  "uvSOVTilokAdjusted": {"name": "Pali_Tilok_Adjusted.ttf", "className": "font-pali-tilok-adjusted"},
+  "uvSOVTilokAdjusted": {"name": "Pali_Tilok_Adjusted.ttf", "className": "font-pali-tilok-adjusted", "default": true},
   "VSThamLanxang": {"name": "VS_Tham_Lanxang.ttf", "className": "font-vs-lanx"},
   "VSThamLanxangBold": {"name": "VS_Tham_Lanxang-Bold.ttf", "className": "font-vs-lanx-bold"},
   "VSThamLanxangPali": {"name": "VS_Tham_Pali.ttf", "className": "font-vs-lanx-pali"}
