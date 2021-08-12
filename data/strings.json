@@ -2,17 +2,17 @@
   "nod": {
     "lang": "nod",
     "strings": {
-      "font": "ᨼ᩠ᩋᩁ᩠ᨲ᩺",
-      "special": "ᨲᩫ᩠ᩅᨻᩥᩆᩮ᩠ᩈ",
+      "font": "ᨼᩬᩁ᩠ᨲ᩺",
+      "special": "ᨲᩫ᩠ᩅᨻᩥᩮᩆ᩠ᩈ",
       "sakot": "ᨲᩫ᩠ᩅᩈᨠᩫ᩠ᨯ",
-      "copy": "ᨣᩢ᩠ᨯᩃ᩠ᩋᨠ",
-      "github": "ᨹᩴ᩠᩵ᩋᨠᩥ᩠ᨴᩉᩢ᩠ᨷ",
-      "fontSizeSmall": "ᨲᩫ᩠ᩅᨶ᩠᩶ᨿ᩠ᩋ",
-      "fontSizeMedium": "ᨲᩫ᩠ᩅᨷ᩠ᨯᩣ᩠ᨿ",
+      "copy": "ᨣᩢ᩠ᨯᩃᩬᨠ",
+      "github": "ᨹᩴ᩵ᩬᨠᩥ᩠ᨴᩉᩢ᩠ᨷ",
+      "fontSizeSmall": "ᨲᩫ᩠ᩅᨶ᩠᩶ᨿᩬ",
+      "fontSizeMedium": "ᨲᩫ᩠ᩅᨷᨯᩣ᩠ᨿ",
       "fontSizeBig": "ᨲᩫ᩠ᩅᩉ᩠ᩃᩅ᩠ᨦ",
-      "alignLeft": "ᨩᩥ᩠ᨯᨪ᩶ᩣ᩠ᨿ",
-      "alignCenter": "ᩀᩪ᩵ᨠ᩠ᩃᩣ᩠ᨦ",
-      "alignRight": "ᨩᩥ᩠ᨯᨡ᩠ᩅᩣ",
+      "alignLeft": "ᩋᩯ᩠ᨷᨪ᩶ᩣ᩠ᨿ",
+      "alignCenter": "ᩀᩪ᩵ᨠ᩠ᩃᩣᨦ",
+      "alignRight": "ᩋᩯ᩠ᨷᨡ᩠ᩅᩣ",
       "help": "ᩅᩥᨵᩦᨩᩲ᩶"
     }
   },
