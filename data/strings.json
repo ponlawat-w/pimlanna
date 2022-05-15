@@ -3,15 +3,15 @@
     "lang": "nod",
     "strings": {
       "font": "ᨼᩬᩁ᩠ᨲ᩺",
-      "special": "ᨲᩫ᩠ᩅᨻᩥᩮᩆ᩠ᩈ",
+      "special": "ᨲᩫ᩠ᩅᨻᩥᩆᩮ᩠ᩈ",
       "sakot": "ᨲᩫ᩠ᩅᩈᨠᩫ᩠ᨯ",
       "copy": "ᨣᩢ᩠ᨯᩃᩬᨠ",
-      "github": "ᨹᩴ᩵ᩬᨠᩥ᩠ᨴᩉᩢ᩠ᨷ",
-      "fontSizeSmall": "ᨲᩫ᩠ᩅᨶ᩠᩶ᨿᩬ",
-      "fontSizeMedium": "ᨲᩫ᩠ᩅᨷᨯᩣ᩠ᨿ",
-      "fontSizeBig": "ᨲᩫ᩠ᩅᩉ᩠ᩃᩅ᩠ᨦ",
+      "github": "ᨹᩬᩴ᩵ᨠᩥ᩠ᨴᩉᩢ᩠ᨷ",
+      "fontSizeSmall": "ᨲᩫ᩠ᩅᨶᩬ᩠᩶ᨿ",
+      "fontSizeMedium": "ᨲᩴ᩠ᩅᨸᨠ᩠ᨲᩥ",
+      "fontSizeBig": "ᨲᩫ᩠ᩅᩉ᩠ᨿᩱ᩵",
       "alignLeft": "ᩋᩯ᩠ᨷᨪ᩶ᩣ᩠ᨿ",
-      "alignCenter": "ᩀᩪ᩵ᨠ᩠ᩃᩣᨦ",
+      "alignCenter": "ᩀᩪ᩵ᨠ᩠ᩃᩣ᩠ᨦ",
       "alignRight": "ᩋᩯ᩠ᨷᨡ᩠ᩅᩣ",
       "help": "ᩅᩥᨵᩦᨩᩲ᩶"
     }

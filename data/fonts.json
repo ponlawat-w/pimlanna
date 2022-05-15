@@ -3,6 +3,8 @@
   "CrInsomLanna": {"name": "CR_Insom_Lanna.ttf", "className": "font-cr-lann"},
   "CrInsomLannaBold": {"name": "CR_Insom_Lanna-Bold.ttf", "className": "font-cr-lann-bold"},
   "CrInsomPali": {"name": "CR_Insom_Pali.ttf", "className": "font-cr-pali"},
+  "NotoSans": {"name": "NotoSansTaiTham-VariableFont_wght.ttf", "className": "font-noto-sans"},
+  "NSTahlom": {"name": "NSTahlom_3.024.1.otf", "className": "font-ns-tahlom"},
   "uvSOVPaliKhottabun": {"name": "Pali_Khottabun.ttf", "className": "font-pali-khot"},
   "uvSOVTilok": {"name": "Pali_Tilok.ttf", "className": "font-pali-tilok"},
   "uvSOVTilokAdjusted": {"name": "Pali_Tilok_Adjusted.ttf", "className": "font-pali-tilok-adjusted", "default": true},

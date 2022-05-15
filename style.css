@@ -1,42 +1,50 @@
 @font-face {
   font-family: ATaiThamKHNewV3;
-  src: url(./fonts/A-Tai-Tham-KH-New-V3.ttf)
+  src: url(./fonts/A-Tai-Tham-KH-New-V3.ttf);
 }
 @font-face {
   font-family: CrInsomLanna;
-  src: url(./fonts/CR_Insom_Lanna.ttf)
+  src: url(./fonts/CR_Insom_Lanna.ttf);
 }
 @font-face {
   font-family: CrInsomLannaBold;
-  src: url(./fonts/CR_Insom_Lanna-Bold.ttf)
+  src: url(./fonts/CR_Insom_Lanna-Bold.ttf);
 }
 @font-face {
   font-family: CrInsomPali;
-  src: url(./fonts/CR_Insom_Pali.ttf)
+  src: url(./fonts/CR_Insom_Pali.ttf);
 }
 @font-face {
   font-family: uvSOVPaliKhottabun;
-  src: url(./fonts/Pali_Khottabun.ttf)
+  src: url(./fonts/Pali_Khottabun.ttf);
 }
 @font-face {
   font-family: uvSOVTilok;
-  src: url(./fonts/Pali_Tilok.ttf)
+  src: url(./fonts/Pali_Tilok.ttf);
 }
 @font-face {
   font-family: uvSOVTilokAdjusted;
-  src: url(./fonts/Pali_Tilok_Adjusted.ttf)
+  src: url(./fonts/Pali_Tilok_Adjusted.ttf);
 }
 @font-face {
   font-family: VSThamLanxang;
-  src: url(./fonts/VS_Tham_Lanxang.ttf)
+  src: url(./fonts/VS_Tham_Lanxang.ttf);
 }
 @font-face {
   font-family: VSThamLanxangBold;
-  src: url(./fonts/VS_Tham_Lanxang-Bold.ttf)
+  src: url(./fonts/VS_Tham_Lanxang-Bold.ttf);
 }
 @font-face {
   font-family: VSThamLanxangPali;
-  src: url(./fonts/VS_Tham_Pali.ttf)
+  src: url(./fonts/VS_Tham_Pali.ttf);
+}
+@font-face {
+  font-family: NotoSansTaiTham;
+  src: url(./fonts/NotoSansTaiTham-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: NSTahlom;
+  src: url(./fonts/NSTahlom_3.024.1.otf) format('opentype');
 }
 
 .font-a-taiv3 [lang=nod] {
@@ -68,6 +76,12 @@
 }
 .font-vs-lanx-pali [lang=nod] {
   font-family: VSThamLanxangPali;
+}
+.font-ns-tahlom [lang=nod] {
+  font-family: NSTahlom;
+}
+.font-noto-sans [lang=nod] {
+  font-family: NotoSansTaiTham;
 }
 
 body {
