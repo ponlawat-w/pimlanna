@@ -3,15 +3,15 @@
     "lang": "nod",
     "strings": {
       "font": "ᨼᩬᩁ᩠ᨲ᩺",
-      "special": "ᨲᩫ᩠ᩅᨻᩥᩆᩮ᩠ᩈ",
-      "sakot": "ᨲᩫ᩠ᩅᩈᨠᩫ᩠ᨯ",
+      "special": "ᨲᩫ᩠ᩅᩅᩥᩆᩮ᩠ᩇ",
+      "sakot": "ᨲᩫ᩠ᩅᨩᩮᩥ᩠ᨦ",
       "copy": "ᨣᩢ᩠ᨯᩃᩬᨠ",
       "github": "ᨹᩬᩴ᩵ᨠᩥ᩠ᨴᩉᩢ᩠ᨷ",
       "fontSizeSmall": "ᨲᩫ᩠ᩅᨶᩬ᩠᩶ᨿ",
-      "fontSizeMedium": "ᨲᩴ᩠ᩅᨸᨠ᩠ᨲᩥ",
-      "fontSizeBig": "ᨲᩫ᩠ᩅᩉ᩠ᨿᩱ᩵",
+      "fontSizeMedium": "ᨲᩫ᩠ᩅᨷᨯᩣ᩠ᨿ",
+      "fontSizeBig": "ᨲᩫ᩠ᩅᩉ᩠ᩃᨦ᩠ᩅ",
       "alignLeft": "ᩋᩯ᩠ᨷᨪ᩶ᩣ᩠ᨿ",
-      "alignCenter": "ᩀᩪ᩵ᨠ᩠ᩃᩣ᩠ᨦ",
+      "alignCenter": "ᩀᩪ᩵ᨲᩡᨠ᩠ᩃᩣ᩠ᨦ",
       "alignRight": "ᩋᩯ᩠ᨷᨡ᩠ᩅᩣ",
       "help": "ᩅᩥᨵᩦᨩᩲ᩶"
     }
@@ -21,7 +21,7 @@
     "strings": {
       "font": "ฟอนต์",
       "special": "ตัวพิเศษ",
-      "sakot": "ตัวสะกด",
+      "sakot": "ตัวเชิง",
       "copy": "คัดลอก",
       "github": "ไปยังกิทฮับ",
       "fontSizeSmall": "ตัวเล็ก",
