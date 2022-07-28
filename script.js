@@ -1,4 +1,4 @@
-const VERSION = '2565061900';
+const VERSION = '2565072800';
 
 new Vue({
   el: '#app',
