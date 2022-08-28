@@ -1,4 +1,7 @@
 .suggestions {
-  height: 50vh !important;
-  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.suggestions .btn {
+  white-space: nowrap;
 }

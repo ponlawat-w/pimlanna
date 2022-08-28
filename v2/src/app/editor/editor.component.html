@@ -1,10 +1,13 @@
 <div class="row">
-  <div class="col-12 col-md-8 col-lg-10">
+  <div class="container">
     <textarea #textarea
       (keydown)="keyDown($event);" (keypress)="keyPress($event);" (keyup)="keyUp($event);"
       class="textarea form-control"></textarea>
   </div>
-  <div class="col-12 col-md-4 col-lg-2">
-    <pimlanna-suggestion [position]="suggestionPosition" [text]="suggestionInput" (applied)="clearSuggestionInput();"></pimlanna-suggestion>
+</div>
+<div class="row">
+  <div class="container">
+    <pimlanna-suggestion [position]="suggestionPosition" [text]="suggestionInput"
+      (applied)="clearSuggestionInput();"></pimlanna-suggestion>
   </div>
 </div>
