@@ -51,9 +51,10 @@ export class SuggestionComponent implements OnChanges {
     }
     if (
       event.key == 'ArrowLeft' || event.key === 'ArrowRight'
-      || event.key === 'Enter' || event.key === 'Tab'
-      || (this.focusIndex > -1 && event.key === ' ')
-      || (this.focusIndex > -1 && event.key === 'Shift')
+      || event.key === 'Tab'
+      || (this.focusIndex > -1 && (
+        event.key === ' ' || event.key === 'Escape' || event.key === 'Enter' || event.key === 'Shift'
+      ))
     ) {
       event.preventDefault();
       return true;
@@ -75,6 +76,10 @@ export class SuggestionComponent implements OnChanges {
       this.focusIndex = 0;
       this.focusChanged($textarea);
       return true;
+    }
+    if (event.key === 'Escape') {
+      $textarea.setSelectionRange($textarea.selectionEnd, $textarea.selectionEnd);
+      this.applied.emit();
     }
     if (event.key === 'ArrowRight' || (event.key === 'Tab' && !event.shiftKey)) {
       this.focusIndex = this.focusIndex >= this.suggestionResults.length - 1 ? 0 : this.focusIndex + 1;

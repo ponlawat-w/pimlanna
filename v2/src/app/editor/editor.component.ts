@@ -96,7 +96,7 @@ export class EditorComponent {
       this.addToText(Characters.signSakot);
     } else if (event.key === 'Backspace') {
       this.processBacksapce();
-    } else if (event.key === 'Escape' || event.key === 'Delete') {
+    } else if (event.key === 'Delete') {
       event.preventDefault();
       this.clearSuggestionInput();
     } else if (this.suggestionComponent.keyUp(event, this.$textarea)) {
