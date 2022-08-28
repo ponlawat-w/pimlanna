@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: NSTahlom;
+  src: url(./assets/NSTahlom_3.024.1.otf) format('opentype');
+}
+
+body, * {
+  font-family: sans-serif, NSTahlom;
+}

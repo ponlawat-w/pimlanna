@@ -1,0 +1,8 @@
+<div class="suggestions">
+  <div class="list-group">
+    <a *ngFor="let suggestion of suggestionResults; let i = index;"
+      href="#" class="list-group-item list-group-item-action pt-0 pb-1 small" [class.active]="focusIndex == i">
+      {{suggestion.text}}
+    </a>
+  </div>
+</div>

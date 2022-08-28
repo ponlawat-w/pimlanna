@@ -1,4 +1,4 @@
-const VERSION = '2565072800';
+const VERSION = '2565082700';
 
 new Vue({
   el: '#app',
@@ -51,7 +51,7 @@ new Vue({
     },
     loadKeys: async function(url = './data/keys.csv?v=' + VERSION) {
       const data = (await axios.get(url)).data.split('\n').map(row => row.split(','));
-      const headers = data.splice(0, 1)[0];
+      const headers = data.splice(0, 1)[0].map(x => x.trim());
 
       for (let i = 0; i < data.length; i++) {
         if (data[i].length != headers.length) {
