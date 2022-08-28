@@ -1,3 +1,11 @@
 .textarea {
   height: 20vh;
+  resize: none;
+}
+
+.rshift-indicator {
+  position: absolute;
+  font-size: 0.6em;
+  bottom: 0;
+  right: 12px;
 }

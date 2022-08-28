@@ -53,8 +53,12 @@ export class EditorComponent {
   keyPress(event: KeyboardEvent) {
     const pressedKey = event.key;
     if (this.keyDict[pressedKey]) {
-      const key: string = this.keyDict[pressedKey][this.rShift] ?? this.keyDict[pressedKey][0];
+      const key: string = this.keyDict[pressedKey][this.rShift] ?? undefined;
       if (!key) {
+        if (this.rShift) {
+          this.rShift = 0;
+          event.preventDefault();
+        }
         this.clearSuggestionInput();
         return;
       }
