@@ -60,6 +60,12 @@ export class SuggestionComponent implements OnChanges {
     }
     return false;
   }
+
+  public applyCurrent($textarea: HTMLTextAreaElement) {
+    if (this.valid && this.focusIndex > -1 && this.focusIndex < this.suggestionResults.length) {
+      this.suggestionResults[this.focusIndex].apply($textarea);
+    }
+  }
   
   public keyUp(event: KeyboardEvent, $textarea: HTMLTextAreaElement): boolean {
     if (!this.valid || !this.suggestionResults.length) {
