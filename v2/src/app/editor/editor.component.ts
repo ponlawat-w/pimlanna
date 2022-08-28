@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { getKeyDict, KeyDict, keys } from 'src/keys';
 import Characters from 'lanna-utils/dist/resources/characters';
+import Patterns from 'lanna-utils/dist/resources/patterns';
 import { SuggestionComponent } from './suggestion/suggestion.component';
 
 @Component({
@@ -17,6 +18,7 @@ export class EditorComponent {
   private keyInDictPressed: boolean = false;
   private keyDict: KeyDict;
   private maxRShift: number;
+  private spatialCharactersPattern: string = `[${Patterns.spatialCharacters}]`;
 
   @ViewChild('textarea') textarea!: ElementRef;
   @ViewChild(SuggestionComponent) suggestionComponent!: SuggestionComponent;
@@ -41,7 +43,7 @@ export class EditorComponent {
       + character
       + this.$textarea.value.substring(selectionEnd, this.$textarea.value.length);
     this.$textarea.setSelectionRange(selectionStart + character.length, selectionStart + character.length);
-    if (this.suggestionPosition === undefined) {
+    if (this.suggestionPosition === undefined && new RegExp(this.spatialCharactersPattern).test(character)) {
       this.suggestionPosition = selectionStart;
       this.suggestionInput = '';
     }
