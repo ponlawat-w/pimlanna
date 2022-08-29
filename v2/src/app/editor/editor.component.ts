@@ -20,7 +20,7 @@ export class EditorComponent {
   private maxRShift: number;
   private spatialCharactersPattern: string = `[${Patterns.spatialCharacters}]`;
 
-  @ViewChild('textarea') textarea!: ElementRef;
+  @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
   @ViewChild(SuggestionComponent) suggestionComponent!: SuggestionComponent;
 
   constructor() {
@@ -28,8 +28,8 @@ export class EditorComponent {
     this.maxRShift = keys.reduce((max, key) => Math.max(max, key.rShiftCount), 0);
   }
 
-  private get $textarea(): HTMLTextAreaElement {
-    return this.textarea.nativeElement as HTMLTextAreaElement;
+  public get $textarea(): HTMLTextAreaElement {
+    return this.textarea.nativeElement;
   }
 
   private get textAreaSelectionStart(): number {
@@ -77,8 +77,8 @@ export class EditorComponent {
     this.keyInDictPressed = false;
     this.keyDownPosition = this.textAreaSelectionStart;
     if (this.$textarea.selectionStart !== this.$textarea.selectionEnd) {
-      if (this.keyDict[event.key] && this.suggestionComponent.focusIndex > -1) {
-        this.suggestionComponent.applyCurrent(this.$textarea);
+      if ((this.keyDict[event.key] || event.key === ' ') && this.suggestionComponent.focusIndex > -1) {
+        this.suggestionComponent.applyCurrent();
       }
       this.clearSuggestionInput();
     }
@@ -99,7 +99,7 @@ export class EditorComponent {
     } else if (event.key === 'Delete') {
       event.preventDefault();
       this.clearSuggestionInput();
-    } else if (this.suggestionComponent.keyUp(event, this.$textarea)) {
+    } else if (this.suggestionComponent.keyUp(event)) {
       return;
     } else if (!this.keyInDictPressed && this.keyDownPosition !== undefined && this.keyDownPosition !== this.textAreaSelectionStart) {
       this.clearSuggestionInput();

@@ -11,6 +11,7 @@ export class SuggestionComponent implements OnChanges {
 
   @Input() position?: number;
   @Input() text?: string;
+  @Input() $textarea!: HTMLTextAreaElement;
   @Output() applied: EventEmitter<undefined> = new EventEmitter<undefined>();
 
   public suggestionResults: ExtendedSuggestionResult[] = [];
@@ -53,7 +54,7 @@ export class SuggestionComponent implements OnChanges {
       event.key == 'ArrowLeft' || event.key === 'ArrowRight'
       || event.key === 'Tab'
       || (this.focusIndex > -1 && (
-        event.key === ' ' || event.key === 'Escape' || event.key === 'Enter' || event.key === 'Shift'
+        event.key === 'Escape' || event.key === 'Enter' || event.key === 'Shift'
       ))
     ) {
       event.preventDefault();
@@ -62,43 +63,38 @@ export class SuggestionComponent implements OnChanges {
     return false;
   }
 
-  public applyCurrent($textarea: HTMLTextAreaElement) {
+  public applyCurrent() {
     if (this.valid && this.focusIndex > -1 && this.focusIndex < this.suggestionResults.length) {
-      this.suggestionResults[this.focusIndex].apply($textarea);
+      this.suggestionResults[this.focusIndex].apply(this.$textarea);
     }
   }
   
-  public keyUp(event: KeyboardEvent, $textarea: HTMLTextAreaElement): boolean {
+  public keyUp(event: KeyboardEvent): boolean {
     if (!this.valid || !this.suggestionResults.length) {
       return false;
     }
     if (this.focusIndex < 0 && event.key === 'Tab') {
       this.focusIndex = 0;
-      this.focusChanged($textarea);
+      this.focusChanged();
       return true;
     }
     if (event.key === 'Escape') {
-      $textarea.setSelectionRange($textarea.selectionEnd, $textarea.selectionEnd);
+      this.$textarea.setSelectionRange(this.$textarea.selectionEnd, this.$textarea.selectionEnd);
       this.applied.emit();
     }
     if (event.key === 'ArrowRight' || (event.key === 'Tab' && !event.shiftKey)) {
-      this.focusIndex = this.focusIndex >= this.suggestionResults.length - 1 ? 0 : this.focusIndex + 1;
-      this.focusChanged($textarea);
+      this.suggestionNext();
       return true;
     }
     if (event.key === 'ArrowLeft' || (event.key === 'Tab' && event.shiftKey)) {
-      this.focusIndex = this.focusIndex <= 0 ? this.suggestionResults.length - 1 : this.focusIndex - 1;
-      this.focusChanged($textarea);
+      this.suggestionPrevious();
       return true;
     }
-    if (
-      (event.key === 'Enter' || event.key === ' ')
-      && (this.focusIndex >= 0 && this.focusIndex < this.suggestionResults.length)
-    ) {
+    if (event.key === 'Enter' && (this.focusIndex >= 0 && this.focusIndex < this.suggestionResults.length)) {
       const suggestion: ExtendedSuggestionResult = this.suggestionResults[this.focusIndex];
-      suggestion.apply($textarea);
+      suggestion.apply(this.$textarea);
       if (suggestion.remaining) {
-        this.checkRemaining(suggestion, $textarea);
+        this.checkRemaining(suggestion);
       } else {
         this.applied.emit()
       }
@@ -106,20 +102,30 @@ export class SuggestionComponent implements OnChanges {
     return false;
   }
 
-  public focusChanged($textarea: HTMLTextAreaElement) {
+  public suggestionNext() {
+    this.focusIndex = this.focusIndex >= this.suggestionResults.length - 1 ? 0 : this.focusIndex + 1;
+    this.focusChanged();
+  }
+
+  public suggestionPrevious() {
+    this.focusIndex = this.focusIndex <= 0 ? this.suggestionResults.length - 1 : this.focusIndex - 1;
+    this.focusChanged();
+  }
+
+  public focusChanged() {
     if (this.focusIndex < 0 || this.focusIndex >= this.suggestionResults.length) {
       return;
     }
     const { selectionStart, selectionEnd } = this.suggestionResults[this.focusIndex];
-    $textarea.setSelectionRange(selectionStart, selectionEnd);
+    this.$textarea.setSelectionRange(selectionStart, selectionEnd);
   }
 
-  private checkRemaining(suggestion: ExtendedSuggestionResult, $textarea: HTMLTextAreaElement) {
+  private checkRemaining(suggestion: ExtendedSuggestionResult) {
     this.suggestionResults = this.utilsSuggestion.suggest(suggestion.remaining)
-      .map(x => new ExtendedSuggestionResult(x, suggestion.remaining, $textarea.selectionStart));
+      .map(x => new ExtendedSuggestionResult(x, suggestion.remaining, this.$textarea.selectionStart));
     if (this.suggestionResults.length) {
       this.focusIndex = 0;
-      this.focusChanged($textarea);
+      this.focusChanged();
     }
   }
 
