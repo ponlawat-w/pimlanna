@@ -63,9 +63,15 @@ export class SuggestionComponent implements OnChanges {
     return false;
   }
 
-  public applyCurrent() {
+  public applyCurrent(processRemaining: boolean) {
     if (this.valid && this.focusIndex > -1 && this.focusIndex < this.suggestionResults.length) {
-      this.suggestionResults[this.focusIndex].apply(this.$textarea);
+      const suggestion: ExtendedSuggestionResult = this.suggestionResults[this.focusIndex];
+      suggestion.apply(this.$textarea);
+      if (processRemaining && suggestion.remaining) {
+        this.checkRemaining(suggestion);
+      } else {
+        this.applied.emit()
+      }
     }
   }
   
@@ -91,13 +97,7 @@ export class SuggestionComponent implements OnChanges {
       return true;
     }
     if (event.key === 'Enter' && (this.focusIndex >= 0 && this.focusIndex < this.suggestionResults.length)) {
-      const suggestion: ExtendedSuggestionResult = this.suggestionResults[this.focusIndex];
-      suggestion.apply(this.$textarea);
-      if (suggestion.remaining) {
-        this.checkRemaining(suggestion);
-      } else {
-        this.applied.emit()
-      }
+      this.applyCurrent(true);
     }
     return false;
   }
@@ -118,6 +118,13 @@ export class SuggestionComponent implements OnChanges {
     }
     const { selectionStart, selectionEnd } = this.suggestionResults[this.focusIndex];
     this.$textarea.setSelectionRange(selectionStart, selectionEnd);
+  }
+
+  public click(index: number) {
+    this.focusIndex = index;
+    this.focusChanged();
+    this.applyCurrent(true);
+    this.$textarea.focus();
   }
 
   private checkRemaining(suggestion: ExtendedSuggestionResult) {

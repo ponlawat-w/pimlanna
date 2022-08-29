@@ -1,6 +1,6 @@
 <div class="suggestions">
   <div class="btn-group">
-    <button *ngFor="let suggestion of suggestionResults; let i = index;"
+    <button *ngFor="let suggestion of suggestionResults; let i = index;" (click)="click(i);"
       type="button" class="btn pt-0 pb-1 small" [class.btn-primary]="focusIndex == i" [class.btn-outline-primary]="focusIndex != i">
       {{suggestion.text}}
     </button>

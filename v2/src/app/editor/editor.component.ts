@@ -78,7 +78,7 @@ export class EditorComponent {
     this.keyDownPosition = this.textAreaSelectionStart;
     if (this.$textarea.selectionStart !== this.$textarea.selectionEnd) {
       if ((this.keyDict[event.key] || event.key === ' ') && this.suggestionComponent.focusIndex > -1) {
-        this.suggestionComponent.applyCurrent();
+        this.suggestionComponent.applyCurrent(false);
       }
       this.clearSuggestionInput();
     }
