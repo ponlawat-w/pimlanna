@@ -6,12 +6,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditorComponent } from './editor/editor.component';
 import { FormsModule } from '@angular/forms';
 import { SuggestionComponent } from './editor/suggestion/suggestion.component';
+import { ExplanationComponent } from './editor/suggestion/explanation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EditorComponent,
-    SuggestionComponent
+    SuggestionComponent,
+    ExplanationComponent
   ],
   imports: [
     BrowserModule,

@@ -24,6 +24,11 @@ export class SuggestionComponent implements OnChanges {
     return this.position !== undefined && this.text !== undefined;
   }
 
+  public get current(): ExtendedSuggestionResult|undefined {
+    return this.suggestionResults.length > 0 && this.focusIndex > -1 && this.focusIndex < this.suggestionResults.length ?
+      this.suggestionResults[this.focusIndex] : undefined;
+  }
+
   constructor() {
     this.utilsLexicon = new Lexicon();
     this.utilsSuggestion = new Suggestion(this.utilsLexicon);

@@ -1,0 +1,13 @@
+<div class="card" *ngIf="item">
+  <div class="card-body">
+    <div class="mb-2">
+      <h3 class="d-inline-block">{{item.text}}</h3>
+      <div class="d-inline-block ms-2">
+        <span *ngFor="let character of characters;" class="character">{{character}}</span>
+      </div>
+    </div>
+    <div class="list-group">
+      <div class="list-group-item small pt-0 pb-2" *ngFor="let relative of relatives;">{{relative}}</div>
+    </div>
+  </div>
+</div>
