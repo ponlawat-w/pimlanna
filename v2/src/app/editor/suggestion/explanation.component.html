@@ -5,7 +5,7 @@
       <div class="d-inline-block ms-2">
         <span *ngFor="let character of characters;" class="character">{{character}}</span>
       </div>
-      <div class="d-inline-block ms-2 segment-explanation" *ngIf="segmentExplanations.length > 0">
+      <div class="d-inline-block ms-2 segment-explanation" *ngIf="segmentExplanationEnabled && segmentExplanations.length > 0">
         <pimlanna-segment-explanation *ngFor="let explanation of segmentExplanations" [explanation]="explanation"></pimlanna-segment-explanation>
       </div>
     </div>

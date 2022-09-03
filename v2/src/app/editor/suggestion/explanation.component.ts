@@ -10,6 +10,7 @@ import { ExtendedSuggestionResult } from './suggestion-result';
 })
 export class ExplanationComponent implements OnChanges {
 
+  @Input() segmentExplanationEnabled: boolean = true;
   @Input() item?: ExtendedSuggestionResult;
   public relatives: string[] = [];
   public characters: string[] = [];

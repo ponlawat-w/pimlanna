@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { SuggestionComponent } from './editor/suggestion/suggestion.component';
 import { ExplanationComponent } from './editor/suggestion/explanation.component';
 import { SegmentExplanationComponent } from './editor/suggestion/segment-explanation.component';
+import { KeyboardComponent } from './editor/keyboard/keyboard.component';
+import { KeyboardButtonComponent } from './editor/keyboard/keyboard-button.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { SegmentExplanationComponent } from './editor/suggestion/segment-explana
     EditorComponent,
     SuggestionComponent,
     ExplanationComponent,
-    SegmentExplanationComponent
+    SegmentExplanationComponent,
+    KeyboardComponent,
+    KeyboardButtonComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { ExtendedSuggestionResult } from './suggestion-result';
 })
 export class SuggestionComponent implements OnChanges {
 
+  @Input() segmentExplanationEnabled: boolean = true;
   @Input() position?: number;
   @Input() text?: string;
   @Input() $textarea!: HTMLTextAreaElement;
@@ -20,7 +21,7 @@ export class SuggestionComponent implements OnChanges {
   private utilsLexicon: Lexicon;
   private utilsSuggestion: Suggestion;
 
-  private get valid(): boolean {
+  public get valid(): boolean {
     return this.position !== undefined && this.text !== undefined;
   }
 
@@ -40,9 +41,11 @@ export class SuggestionComponent implements OnChanges {
     if (!this.valid) {
       this.focusIndex = -1;
       this.suggestionResults = [];
+      this.$textarea.setSelectionRange(this.$textarea.selectionEnd, this.$textarea.selectionEnd);
+      this.applied.emit();
       return;
     }
-    this.focusIndex = 0;
+    this.focusIndex = -1;
     this.suggestionResults = this.utilsSuggestion.suggest(this.text!)
       .map(x => new ExtendedSuggestionResult(x, this.text!, this.position!));
   }

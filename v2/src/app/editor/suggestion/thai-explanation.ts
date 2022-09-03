@@ -154,7 +154,7 @@ export class ThaiExplanation {
     this.processCentralLeft();
     this.processCentral();
     this.processWithFloat(segmentExplantion.bottom, this.floatBottom);
-    this.processWithFloat(segmentExplantion.top, this.floatTop);
+    this.processWithFloat(segmentExplantion.top, this.floatTop, true);
     this.processAllInline(this.segmentExplanation.right, true);
     this.processWithFloat(segmentExplantion.rightBottom, this.floatBottomRight);
     this.processWithFloat(segmentExplantion.rightTop, this.floatTopRight);
@@ -185,8 +185,12 @@ export class ThaiExplanation {
     this.inlineBlock += this.getMapping(this.segmentExplanation.central).result;
   }
 
-  processWithFloat(explanation: string, floatArray: string[]) {
+  processWithFloat(explanation: string, floatArray: string[], top: boolean = false) {
     for (const char of explanation) {
+      if (top && char === characters.vowelSignO && this.segmentExplanation.bottom.indexOf(characters.letterWa) > -1) {
+        this.inlineBlock += 'ั';
+        return;
+      }
       const mapping = this.getMapping(char);
       if (mapping.result === '?') {
         continue;

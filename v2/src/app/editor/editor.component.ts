@@ -3,6 +3,13 @@ import { getKeyDict, KeyDict, keys } from 'src/keys';
 import Characters from 'lanna-utils/dist/resources/characters';
 import Patterns from 'lanna-utils/dist/resources/patterns';
 import { SuggestionComponent } from './suggestion/suggestion.component';
+import { KeyboardComponent } from './keyboard/keyboard.component';
+
+type EditorOptions = {
+  virtualKeyboard: boolean,
+  mobile: boolean,
+  suggestions: boolean
+};
 
 @Component({
   selector: 'pimlanna-editor',
@@ -12,6 +19,11 @@ import { SuggestionComponent } from './suggestion/suggestion.component';
 export class EditorComponent {
 
   public rShift: number = 0;
+  public options: EditorOptions = {
+    virtualKeyboard: true,
+    mobile: false,
+    suggestions: true
+  };
   public suggestionPosition?: number;
   public suggestionInput?: string;
   private keyDownPosition?: number;
@@ -21,7 +33,8 @@ export class EditorComponent {
   private spatialCharactersPattern: string = `[${Patterns.spatialCharacters}]`;
 
   @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
-  @ViewChild(SuggestionComponent) suggestionComponent!: SuggestionComponent;
+  @ViewChild(SuggestionComponent) suggestionComponent?: SuggestionComponent;
+  @ViewChild(KeyboardComponent) keyboardComponent?: KeyboardComponent;
 
   constructor() {
     this.keyDict = getKeyDict();
@@ -30,6 +43,11 @@ export class EditorComponent {
 
   public get $textarea(): HTMLTextAreaElement {
     return this.textarea.nativeElement;
+  }
+
+  public get suggested(): boolean {
+    return this.suggestionInput && this.suggestionComponent
+      && this.suggestionComponent.valid && this.suggestionComponent.suggestionResults.length > 0 ? true : false;
   }
 
   private get textAreaSelectionStart(): number {
@@ -43,11 +61,14 @@ export class EditorComponent {
       + character
       + this.$textarea.value.substring(selectionEnd, this.$textarea.value.length);
     this.$textarea.setSelectionRange(selectionStart + character.length, selectionStart + character.length);
-    if (this.suggestionPosition === undefined && new RegExp(this.spatialCharactersPattern).test(character)) {
-      this.suggestionPosition = selectionStart;
-      this.suggestionInput = '';
+    if (this.options.suggestions) {
+      if (this.suggestionPosition === undefined && new RegExp(this.spatialCharactersPattern).test(character)) {
+        this.suggestionPosition = selectionStart;
+        this.suggestionInput = '';
+      }
+      this.suggestionInput += character;
     }
-    this.suggestionInput += character;
+    this.rShift = 0;
   }
 
   keyPress(event: KeyboardEvent) {
@@ -71,13 +92,14 @@ export class EditorComponent {
   }
 
   keyDown(event: KeyboardEvent) {
-    if (this.suggestionComponent.keyDown(event)) {
+    this.keyboardComponent && this.keyboardComponent.keyDown(event);
+    if (this.suggestionComponent &&  this.suggestionComponent.keyDown(event)) {
       return;
     }
     this.keyInDictPressed = false;
     this.keyDownPosition = this.textAreaSelectionStart;
     if (this.$textarea.selectionStart !== this.$textarea.selectionEnd) {
-      if ((this.keyDict[event.key] || event.key === ' ') && this.suggestionComponent.focusIndex > -1) {
+      if ((this.keyDict[event.key] || event.key === ' ') && this.suggestionComponent && this.suggestionComponent.focusIndex > -1) {
         this.suggestionComponent.applyCurrent(false);
       }
       this.clearSuggestionInput();
@@ -85,12 +107,10 @@ export class EditorComponent {
   }
   
   keyUp(event: KeyboardEvent) {
+    this.keyboardComponent && this.keyboardComponent.keyUp(event);
     if (event.key === 'Shift' && (event.location === 0 || event.location === 2)) {
       event.preventDefault();
-      this.rShift++;
-      if (this.rShift > this.maxRShift) {
-        this.rShift = 0;
-      }
+      this.addRightShift();
     } else if ((event.key === 'Alt' || event.key === 'AltGraph') && event.location === 2) {
       event.preventDefault();
       this.addToText(Characters.signSakot);
@@ -99,10 +119,20 @@ export class EditorComponent {
     } else if (event.key === 'Delete') {
       event.preventDefault();
       this.clearSuggestionInput();
-    } else if (this.suggestionComponent.keyUp(event)) {
+    } else if (this.suggestionComponent && this.suggestionComponent.keyUp(event)) {
       return;
+    } else if (event.key === 'Escape' && this.suggestionInput) {
+      event.preventDefault();
+      this.clearSuggestionInput();
     } else if (!this.keyInDictPressed && this.keyDownPosition !== undefined && this.keyDownPosition !== this.textAreaSelectionStart) {
       this.clearSuggestionInput();
+    }
+  }
+
+  addRightShift() {
+    this.rShift++;
+    if (this.rShift > this.maxRShift) {
+      this.rShift = 0;
     }
   }
 
@@ -120,6 +150,31 @@ export class EditorComponent {
   public clearSuggestionInput() {
     this.suggestionPosition = undefined;
     this.suggestionInput = undefined;
+  }
+
+  public virtualKeyboardInteracted(event: string) {
+    this.$textarea.focus();
+    if (event === 'Backspace') {
+      if (this.$textarea.selectionStart > 0) {
+        let newSelection = this.$textarea.selectionStart - 1;
+        this.$textarea.value = this.$textarea.value.substring(0, this.$textarea.selectionStart - 1)
+          + this.$textarea.value.substring(this.$textarea.selectionEnd);
+        this.$textarea.setSelectionRange(newSelection, newSelection);
+        this.processBacksapce();
+      }
+    } else if (event === 'RightShift') {
+      this.addRightShift();
+    } else if (event === 'SuggestionNext') {
+      this.suggestionComponent ? this.suggestionComponent.suggestionNext() : undefined;
+    } else if (event === 'SuggestionPrevious') {
+      this.suggestionComponent ? this.suggestionComponent.suggestionPrevious() : undefined;
+    } else if (event === 'SuggestionTake') {
+      this.suggestionComponent ? this.suggestionComponent.applyCurrent(true) : undefined;
+    } else if (event === 'SuggestionReject') {
+      this.clearSuggestionInput();
+    } else {
+      this.addToText(event);
+    }
   }
 
 }

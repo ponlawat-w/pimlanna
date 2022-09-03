@@ -1,9 +1,12 @@
-<div class="suggestions">
-  <div class="btn-group">
-    <button *ngFor="let suggestion of suggestionResults; let i = index;" (click)="click(i);"
-      type="button" class="btn pt-0 pb-1 small" [class.btn-primary]="focusIndex == i" [class.btn-outline-primary]="focusIndex != i">
-      {{suggestion.text}}
-    </button>
+<div class="position-absolute w-100 suggestions" *ngIf="valid">
+  <div class="container">
+    <div class="btn-group">
+      <button *ngFor="let suggestion of suggestionResults; let i = index;" (click)="click(i);" type="button"
+        class="btn pt-0 pb-1 small" [class.btn-primary]="focusIndex == i"
+        [class.btn-outline-primary]="focusIndex != i">
+        {{suggestion.text}}
+      </button>
+    </div>
+    <pimlanna-explanation [segmentExplanationEnabled]="segmentExplanationEnabled" [item]="current"></pimlanna-explanation>
   </div>
 </div>
-<pimlanna-explanation [item]="current"></pimlanna-explanation>

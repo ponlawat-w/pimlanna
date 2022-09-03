@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SafeHtml } from '@angular/platform-browser';
 import segmentExplanation, { SegmentExplanation } from 'lanna-utils/dist/segment-explanation';
 import { ThaiExplanation } from './thai-explanation';
 

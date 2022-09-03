@@ -1,5 +1,8 @@
 .suggestions {
+  background-color: #ffffff;
   overflow-x: hidden;
+  left: 0;
+  z-index: 1000;
 }
 
 .suggestions .btn {
