@@ -7,13 +7,15 @@ import { EditorComponent } from './editor/editor.component';
 import { FormsModule } from '@angular/forms';
 import { SuggestionComponent } from './editor/suggestion/suggestion.component';
 import { ExplanationComponent } from './editor/suggestion/explanation.component';
+import { SegmentExplanationComponent } from './editor/suggestion/segment-explanation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EditorComponent,
     SuggestionComponent,
-    ExplanationComponent
+    ExplanationComponent,
+    SegmentExplanationComponent
   ],
   imports: [
     BrowserModule,

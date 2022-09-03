@@ -42,7 +42,7 @@ export class SuggestionComponent implements OnChanges {
       this.suggestionResults = [];
       return;
     }
-    this.focusIndex = -1;
+    this.focusIndex = 0;
     this.suggestionResults = this.utilsSuggestion.suggest(this.text!)
       .map(x => new ExtendedSuggestionResult(x, this.text!, this.position!));
   }

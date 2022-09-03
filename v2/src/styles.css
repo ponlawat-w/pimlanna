@@ -8,3 +8,7 @@
 body, * {
   font-family: sans-serif, NSTahlom;
 }
+
+body {
+  overflow-y: hidden;
+}
