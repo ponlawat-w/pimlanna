@@ -3,7 +3,7 @@
     <div class="container" [style.padding-left]="row.left" style="justify-content: center;">
       <button *ngIf="index == 3"  type="button"
         class="btn keyboard-btn btn-outline-secondary" [class.active]="currentKey == 'LeftShift' || leftShift"
-        (click)="leftShift = !leftShift; emit('', false);"
+        (click)="leftShift = !leftShift; emit('LeftShift', false);"
         style="margin-right: 1%; width: 12%;">↑</button>
       <pimlanna-keyboard-button *ngFor="let keyButton of row.keys"
         [leftShift]="leftShift" [rightShift]="rightShift"

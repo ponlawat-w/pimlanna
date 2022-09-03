@@ -162,6 +162,8 @@ export class EditorComponent {
         this.$textarea.setSelectionRange(newSelection, newSelection);
         this.processBacksapce();
       }
+    } else if (event === 'LeftShift') {
+      return;
     } else if (event === 'RightShift') {
       this.addRightShift();
     } else if (event === 'SuggestionNext') {
