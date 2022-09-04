@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { Lexicon, Suggestion } from 'lanna-utils';
+import { Lexicon, Suggestion, textSegment } from 'lanna-utils';
 import { ExtendedSuggestionResult } from './suggestion-result';
 
 @Component({
@@ -15,6 +15,7 @@ export class SuggestionComponent implements OnChanges {
   @Input() $textarea!: HTMLTextAreaElement;
   @Output() applied: EventEmitter<undefined> = new EventEmitter<undefined>();
 
+  public lastExactResult?: ExtendedSuggestionResult;
   public suggestionResults: ExtendedSuggestionResult[] = [];
   public focusIndex: number = -1;
 
@@ -33,21 +34,53 @@ export class SuggestionComponent implements OnChanges {
   constructor() {
     this.utilsLexicon = new Lexicon();
     this.utilsSuggestion = new Suggestion(this.utilsLexicon);
-    this.utilsSuggestion.returnCount = 20;
-    this.utilsSuggestion.searchCount = 100;
+    this.utilsSuggestion.returnCount = 10;
+    this.utilsSuggestion.searchCount = 200;
   }
 
   ngOnChanges(_: SimpleChanges) {
     if (!this.valid) {
       this.focusIndex = -1;
       this.suggestionResults = [];
+      this.lastExactResult = undefined;
       this.$textarea.setSelectionRange(this.$textarea.selectionEnd, this.$textarea.selectionEnd);
       this.applied.emit();
       return;
     }
     this.focusIndex = -1;
-    this.suggestionResults = this.utilsSuggestion.suggest(this.text!)
-      .map(x => new ExtendedSuggestionResult(x, this.text!, this.position!));
+    this.suggest(this.text!, this.position!);
+  }
+  
+  suggest(text: string, position: number) {
+    this.suggestionResults = this.utilsSuggestion.suggest(text)
+      .map(x => new ExtendedSuggestionResult(x, text, position));
+    const exacts = this.suggestionResults.filter(x => x.text === text);
+    if (exacts.length) {
+      this.lastExactResult = exacts[0];
+    }
+    if (this.lastExactResult) {
+      this.updateLastExactResultRemaining(text, position);
+    }
+    if (!this.lastExactResult) {
+      return;
+    }
+    const lastExactResultIndex = this.suggestionResults.map(x => x.text)
+      .indexOf(this.lastExactResult!.text);
+    if (lastExactResultIndex > -1) {
+      this.suggestionResults.splice(lastExactResultIndex, 1);
+    }
+    this.suggestionResults = [this.lastExactResult, ...this.suggestionResults];
+  }
+
+  updateLastExactResultRemaining(text: string, position: number) {
+    if (!text.startsWith(this.lastExactResult!.text)) {
+      this.lastExactResult = undefined;
+      return;
+    }
+    this.lastExactResult = new ExtendedSuggestionResult(
+      {text: this.lastExactResult!.text, remaining: text.substring(this.lastExactResult!.text.length)},
+      text, position
+    );
   }
 
   public keyDown(event: KeyboardEvent): boolean {
@@ -75,6 +108,7 @@ export class SuggestionComponent implements OnChanges {
     if (this.valid && this.focusIndex > -1 && this.focusIndex < this.suggestionResults.length) {
       const suggestion: ExtendedSuggestionResult = this.suggestionResults[this.focusIndex];
       suggestion.apply(this.$textarea);
+      this.lastExactResult = undefined;
       if (processRemaining && suggestion.remaining) {
         this.checkRemaining(suggestion);
       } else {
@@ -94,7 +128,12 @@ export class SuggestionComponent implements OnChanges {
     }
     if (event.key === 'Escape') {
       this.$textarea.setSelectionRange(this.$textarea.selectionEnd, this.$textarea.selectionEnd);
-      this.applied.emit();
+      if (this.current && this.current.remaining) {
+        this.checkRemaining(this.current);
+      } else {
+        this.applied.emit();
+      }
+      return true;
     }
     if (event.key === 'ArrowRight' || (event.key === 'Tab' && !event.shiftKey)) {
       this.suggestionNext();
@@ -136,8 +175,11 @@ export class SuggestionComponent implements OnChanges {
   }
 
   private checkRemaining(suggestion: ExtendedSuggestionResult) {
-    this.suggestionResults = this.utilsSuggestion.suggest(suggestion.remaining)
-      .map(x => new ExtendedSuggestionResult(x, suggestion.remaining, this.$textarea.selectionStart));
+    const remainingSegments = textSegment(suggestion.remaining);
+    for (let i = 1; i <= remainingSegments.length; i++) {
+      const checkSegments = remainingSegments.slice(0, i);
+      this.suggest(checkSegments.join(''), this.$textarea.selectionStart);
+    }
     if (this.suggestionResults.length) {
       this.focusIndex = 0;
       this.focusChanged();

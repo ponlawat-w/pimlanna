@@ -4,13 +4,13 @@
       <input class="form-check-input" type="checkbox" id="virtualKeyboard" [(ngModel)]="options.virtualKeyboard">
       <label class="form-check-label" for="virtualKeyboard">ᨸᩯ᩠᩶ᨶᨷᩫ᩠ᨶᨧᩬᩴ</label>
     </div>
-    <div class="form-check form-switch d-inline-block ms-3" *ngIf="options.suggestions">
-      <input class="form-check-input" type="checkbox" id="thaiExplanation" [(ngModel)]="options.mobile">
-      <label class="form-check-label" for="thaiExplanation">ᨾᩨᨳᩨ</label>
-    </div>
     <div class="form-check form-switch d-inline-block ms-3">
       <input class="form-check-input" type="checkbox" id="suggestions" [(ngModel)]="options.suggestions">
       <label class="form-check-label" for="suggestions">ᨩ᩠ᩅ᩠᩵ᨿᨻᩥᨾᩛ᩺</label>
+    </div>
+    <div class="form-check form-switch d-inline-block ms-3">
+      <input class="form-check-input" type="checkbox" id="thaiExplanation" [(ngModel)]="options.mobile">
+      <label class="form-check-label" for="thaiExplanation">ᨾᩨᨳᩨ</label>
     </div>
     <span class="badge bg-danger rshift-indicator" *ngIf="rShift">{{rShift}}</span>
     <textarea #textarea
