@@ -66,7 +66,9 @@ export class EditorComponent {
         this.suggestionPosition = selectionStart;
         this.suggestionInput = '';
       }
-      this.suggestionInput += character;
+      if (this.suggestionInput !== undefined) {
+        this.suggestionInput += character;
+      }
     }
     this.rShift = 0;
   }

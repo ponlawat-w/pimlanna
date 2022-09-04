@@ -51,6 +51,9 @@ export class KeyboardComponent implements AfterViewInit {
     } else {
       this.currentKey = undefined;
     }
+    if (key === 'LeftShift') {
+      this.leftShift = false;
+    }
   }
   
   public keyDown(event: KeyboardEvent) {
@@ -60,6 +63,9 @@ export class KeyboardComponent implements AfterViewInit {
       component.active = true;
     } else {
       this.currentKey = key;
+    }
+    if (key === 'LeftShift') {
+      this.leftShift = true;
     }
   }
 
