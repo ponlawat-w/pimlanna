@@ -4,6 +4,7 @@ import Characters from 'lanna-utils/dist/resources/characters';
 import Patterns from 'lanna-utils/dist/resources/patterns';
 import { SuggestionComponent } from './suggestion/suggestion.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
+import { ThemeService } from '../theme.service';
 
 type EditorOptions = {
   virtualKeyboard: boolean,
@@ -36,7 +37,17 @@ export class EditorComponent {
   @ViewChild(SuggestionComponent) suggestionComponent?: SuggestionComponent;
   @ViewChild(KeyboardComponent) keyboardComponent?: KeyboardComponent;
 
-  constructor() {
+  public get dark(): boolean {
+    return this.themeService.darkMode;
+  }
+
+  public get suggestionSelected(): boolean {
+    return this.suggestionComponent ? this.suggestionComponent.focusIndex > -1 : false;
+  }
+
+  constructor(
+    private themeService: ThemeService
+  ) {
     this.keyDict = getKeyDict();
     this.maxRShift = keys.reduce((max, key) => Math.max(max, key.rShiftCount), 0);
   }
@@ -175,7 +186,7 @@ export class EditorComponent {
     } else if (event === 'SuggestionTake') {
       this.suggestionComponent ? this.suggestionComponent.applyCurrent(true) : undefined;
     } else if (event === 'SuggestionReject') {
-      this.clearSuggestionInput();
+      this.suggestionComponent ? this.suggestionComponent.suggestionReject() : this.clearSuggestionInput();
     } else {
       this.addToText(event);
     }

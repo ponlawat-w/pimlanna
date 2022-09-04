@@ -13,3 +13,12 @@ body, * {
 body {
   overflow-y: hidden;
 }
+
+body.dark {
+  background-color: #252525;
+  color: #ffffff;;
+}
+
+body.dark, body.dark * {
+  color: #ffffff;
+}

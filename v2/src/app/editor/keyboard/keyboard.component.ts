@@ -2,6 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChildren } f
 import { getTaithamLayout, TaitthamKeyboardRow } from './keyboard-button';
 import { KeyboardButtonComponent } from './keyboard-button.component';
 import characters from 'lanna-utils/dist/resources/characters';
+import { ThemeService } from 'src/app/theme.service';
 
 @Component({
   selector: 'pimlanna-keyboard',
@@ -10,6 +11,7 @@ import characters from 'lanna-utils/dist/resources/characters';
 })
 export class KeyboardComponent implements AfterViewInit {
   @Input() suggested: boolean = false;
+  @Input() suggestionSelected: boolean = false;
   @Input() rightShift: number = 0;
   @ViewChildren(KeyboardButtonComponent) keyboardButtonComponents!: KeyboardButtonComponent[];
   @Output() interact: EventEmitter<string> = new EventEmitter<string>();
@@ -19,7 +21,13 @@ export class KeyboardComponent implements AfterViewInit {
   public choeng: string = characters.signSakot;
   public leftShift: boolean = false;
 
-  constructor() {
+  public get dark(): boolean {
+    return this.themeService.darkMode;
+  }
+
+  constructor(
+    private themeService: ThemeService
+  ) {
     this.layoutRows = getTaithamLayout();
   }
 

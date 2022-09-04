@@ -1,4 +1,4 @@
-<div class="container position-relative">
+<div class="container position-relative" [hidden]="suggestionSelected">
   <div *ngFor="let row of layoutRows; let index = index;" class="row my-1">
     <div class="container" [style.padding-left]="row.left" style="justify-content: center;">
       <button *ngIf="index == 3"  type="button"
@@ -36,7 +36,7 @@
     </div>
   </div>
 </div>
-<div class="position-absolute suggestion-controller suggestion-controller-left bg-light" *ngIf="suggested">
+<div *ngIf="suggested" class="position-absolute suggestion-controller suggestion-controller-left" [class.bg-light]="!dark" [class.bg-dark]="dark">
   <button type="button" class="btn keyboard-btn btn-outline-primary"
     (click)="emit('SuggestionPrevious');">
     ≪
@@ -46,7 +46,7 @@
     ×
   </button>
 </div>
-<div class="position-absolute suggestion-controller suggestion-controller-right bg-light" *ngIf="suggested">
+<div *ngIf="suggested" class="position-absolute suggestion-controller suggestion-controller-right" [class.bg-light]="!dark" [class.bg-dark]="dark">
   <button type="button" class="btn keyboard-btn btn-outline-success"
     (click)="emit('SuggestionTake');">
     ✓

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Lexicon, Suggestion, textSegment } from 'lanna-utils';
+import { ThemeService } from 'src/app/theme.service';
 import { ExtendedSuggestionResult } from './suggestion-result';
 
 @Component({
@@ -31,7 +32,13 @@ export class SuggestionComponent implements OnChanges {
       this.suggestionResults[this.focusIndex] : undefined;
   }
 
-  constructor() {
+  public get dark(): boolean {
+    return this.themeService.darkMode;
+  }
+
+  constructor(
+    private themeService: ThemeService
+  ) {
     this.utilsLexicon = new Lexicon();
     this.utilsSuggestion = new Suggestion(this.utilsLexicon);
     this.utilsSuggestion.returnCount = 10;
@@ -127,12 +134,7 @@ export class SuggestionComponent implements OnChanges {
       return true;
     }
     if (event.key === 'Escape') {
-      this.$textarea.setSelectionRange(this.$textarea.selectionEnd, this.$textarea.selectionEnd);
-      if (this.current && this.current.remaining) {
-        this.checkRemaining(this.current);
-      } else {
-        this.applied.emit();
-      }
+      this.suggestionReject();
       return true;
     }
     if (event.key === 'ArrowRight' || (event.key === 'Tab' && !event.shiftKey)) {
@@ -157,6 +159,15 @@ export class SuggestionComponent implements OnChanges {
   public suggestionPrevious() {
     this.focusIndex = this.focusIndex <= 0 ? this.suggestionResults.length - 1 : this.focusIndex - 1;
     this.focusChanged();
+  }
+
+  public suggestionReject() {
+    this.$textarea.setSelectionRange(this.$textarea.selectionEnd, this.$textarea.selectionEnd);
+    if (this.current && this.current.remaining) {
+      this.checkRemaining(this.current);
+    } else {
+      this.applied.emit();
+    }
   }
 
   public focusChanged() {

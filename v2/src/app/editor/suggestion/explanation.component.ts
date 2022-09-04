@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Lexicon, segmentExplanation, textSegment } from 'lanna-utils';
 import { SegmentExplanation } from 'lanna-utils/dist/segment-explanation';
+import { ThemeService } from 'src/app/theme.service';
 import { ExtendedSuggestionResult } from './suggestion-result';
 
 @Component({
@@ -17,7 +18,13 @@ export class ExplanationComponent implements OnChanges {
   public segmentExplanations: SegmentExplanation[] = [];
   private lexicon: Lexicon;
 
-  constructor() {
+  public get dark() {
+    return this.themeService.darkMode;
+  }
+
+  constructor(
+    private themeService: ThemeService
+  ) {
     this.lexicon = new Lexicon();
   }
 
