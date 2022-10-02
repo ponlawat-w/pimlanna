@@ -1,0 +1,11 @@
+.character {
+  font-size: 0.8em;
+  padding: 3px 2px;
+  border: #666666 solid 1px;
+  border-radius: 5px;
+}
+
+.segment-explanation {
+  font-size: 0.9em;
+  padding: 2em 0;
+}

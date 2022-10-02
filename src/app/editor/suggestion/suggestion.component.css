@@ -1,0 +1,13 @@
+.suggestions {
+  overflow-x: hidden;
+  left: 0;
+  z-index: 1000;
+}
+
+.suggestions.bg-white {
+  border-color: #ffffff;
+}
+
+.suggestions .btn {
+  white-space: nowrap;
+}

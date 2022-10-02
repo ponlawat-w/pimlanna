@@ -1,0 +1,34 @@
+div {
+  position: relative;
+}
+
+.float {
+  font-size: 0.75em;
+  transform: scale(1, 0.75);
+}
+
+.float-bottom {
+  top: 1em;
+  left: 50%;
+}
+
+.float-top {
+  top: -0.75em;
+  left: 50%;
+}
+
+.float-top-right {
+  top: -0.75em;
+  right: 0;
+}
+
+.float-bottom-right {
+  top: 1em;
+  right: 0;
+}
+
+::ng-deep .central-left {
+  display: inline-block;
+  transform-origin: 0 1em;
+  transform: scale(1, 1.75);
+}
