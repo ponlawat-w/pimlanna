@@ -33,12 +33,12 @@ export class KeyboardComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.componentsDict = this.keyboardButtonComponents
-      .reduce<{[key: string]: KeyboardButtonComponent}>((obj, c) => ({
+      .reduce<{[key: string]: KeyboardButtonComponent}>((obj, c) => c.keyButton ? ({
         ...obj,
         [c.keyButton.thai]: c,
         [c.keyButton.thaiShift]: c,
         [c.keyButton.latin]: c
-      }), {});
+      }) : obj, {});
   }
 
   private getKey(event: KeyboardEvent): string {

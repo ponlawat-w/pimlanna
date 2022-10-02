@@ -8,21 +8,28 @@ import { TaithamKeyboardButton } from './keyboard-button';
 })
 export class KeyboardButtonComponent {
 
-  @Input() keyButton!: TaithamKeyboardButton;
+  @Input() keyButton?: TaithamKeyboardButton;
   @Input() leftShift: boolean = false;
   @Input() rightShift: number = 0;
   @Output() interact: EventEmitter<string> = new EventEmitter();
   public active: boolean = false;
 
+  public get latin(): string {
+    return this.keyButton?.latin ?? '';
+  }
+
   public get taitham(): string {
-    return this.keyButton.taitham[this.rightShift] ?? '';
+    return this.keyButton?.taitham[this.rightShift] ?? '';
   }
 
   public get taithamShift(): string {
-    return this.keyButton.taithamShift[this.rightShift] ?? '';
+    return this.keyButton?.taithamShift[this.rightShift] ?? '';
   }
 
   public get current(): string {
+    if (!this.keyButton) {
+      return '';
+    }
     return (this.leftShift ? this.keyButton.taithamShift[this.rightShift] : this.keyButton.taitham[this.rightShift]) ?? '';
   }
 
