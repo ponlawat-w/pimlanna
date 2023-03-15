@@ -30,7 +30,7 @@ export class KeyboardButton {
     return this.taithamShifted[rShiftCount] ?? '';
   }
 
-  public getCurrent(lShift: boolean, rShiftCount: number = 0): string {
+  public getCurrent(lShift: boolean = false, rShiftCount: number = 0): string {
     return (lShift ? this.taithamShifted : this.taitham)[rShiftCount] ?? '';
   }
 

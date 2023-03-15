@@ -1,7 +1,7 @@
 import Characters from 'lanna-utils/dist/resources/characters';
 import type { KeyMapping } from '../mapping';
 
-export const keys: KeyMapping[] = [
+export default [
   { taitham: Characters.letterHighKa, key: 'ก' },
   { taitham: Characters.letterHighKha, key: 'ข' },
   { taitham: Characters.letterHighKxa, key: 'ฃ' },
@@ -139,4 +139,4 @@ export const keys: KeyMapping[] = [
   { taitham: Characters.signSatkaankuu, key: 'ฯ', rShiftCount: 1 },
   { taitham: Characters.signHang, key: 'ห', rShiftCount: 2 },
   { taitham: Characters.signCaang, key: 'ช', rShiftCount: 1 }
-];
+] as KeyMapping[];

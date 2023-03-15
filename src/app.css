@@ -1,0 +1,9 @@
+@font-face {
+  font-family: NSTahlom;
+  src: url(/ns-tahlom.otf) format('opentype');
+}
+
+body, * {
+  font-family: sans-serif, NSTahlom;
+  touch-action: manipulation;
+}
