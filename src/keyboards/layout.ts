@@ -1,7 +1,8 @@
 type LayoutButton = {
   key: string,
   keyShifted: string,
-  latin: string
+  latin: string,
+  width?: number
 };
 
 type LayoutRow = LayoutButton[];
@@ -10,7 +11,7 @@ export type InputLayout = LayoutRow[];
 
 export const ThaiKedmanee: InputLayout = [
   [
-    {key: '_', keyShifted: '%', latin: '`'},
+    {key: '_', keyShifted: '%', latin: '`', width: 5},
     {key: 'ๅ', keyShifted: '+', latin: '1'},
     {key: '/', keyShifted: '๑', latin: '2'},
     {key: '-', keyShifted: '๒', latin: '3'},

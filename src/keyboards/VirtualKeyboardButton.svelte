@@ -6,33 +6,44 @@
 
   $: darkMode = $isDarkMode;
 
+  const display = button.display;
   const latin = button.latin;
   $: taitham = button.getCurrentTaitham();
   $: taithamShifted = button.getCurrentShiftedTaitham();
   $: current = button.getCurrent();
 </script>
 
-<button type="button" class="btn btn-outline-secondary {darkMode ? 'text-light' : 'text-dark'}">
-  <span class="latin d-none d-lg-block">
-    {latin}
-  </span>
-  <span class="taitham d-none d-lg-block">
-    {taitham}
-  </span>
-  <span class="taitham-shifted d-none d-lg-block">
-    {taithamShifted}
-  </span>
-  <span class="taitham-small d-none d-lg-none">
-    {current}
-  </span>
+<button
+  type="button"
+  class="btn btn-outline-secondary {darkMode ? 'text-light' : 'text-dark'}"
+  style:width="{button.width}%"
+>
+  {#if display}
+    {display}
+  {:else}
+    <span class="latin d-none d-lg-block">
+      {latin}
+    </span>
+    <span class="taitham d-none d-lg-block">
+      {taitham}
+    </span>
+    <span class="taitham-shifted d-none d-lg-block">
+      {taithamShifted}
+    </span>
+    <span class="taitham-small d-block d-lg-none">
+      {current}
+    </span>
+  {/if}
 </button>
 
 <style>
   button {
-    padding: 0;
-    width: 7%;
-    height: 2em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    padding: 0;
+    height: 2em;
     touch-action: manipulation;
   }
 
