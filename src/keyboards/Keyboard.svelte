@@ -6,31 +6,27 @@
   import VirtualKeyboard from './VirtualKeyboard.svelte';
 
   export let keyMappings: KeyMapping[] = [];
+  export let leftShift: boolean;
+  export let rightShiftCount: number;
 
   let maxRightShift: number = 0;
   $: maxRightShift = keyMappings.reduce<number>((prev, curr) => curr.rShiftCount > prev ? curr.rShiftCount : prev, 0);
 
-  const leftShift = writable<boolean>(false);
-  setContext<Writable<boolean>>('leftShift', leftShift);
+  const leftShiftWritable = writable<boolean>(false);
+  setContext<Writable<boolean>>('leftShift', leftShiftWritable);
+  $: leftShiftWritable.set(leftShift);
 
-  const rightShift = writable<number>(0,);
-  setContext<Writable<number>>('rightShift', rightShift);
-  const unsubscribeRightShift = rightShift.subscribe(x => {
-    if (x > maxRightShift) {
-      rightShift.set(0);
-    }
-  });
+  const rightShiftWritable = writable<number>(0,);
+  setContext<Writable<number>>('rightShift', rightShiftWritable);
+  $: rightShiftWritable.set(rightShiftCount);
+  $: rightShiftCount = $rightShiftWritable;
 
   const resetShifts = () => {
-    leftShift.set(false);
-    rightShift.set(0);
+    leftShiftWritable.set(false);
+    rightShiftWritable.set(0);
   };
 
   $: dark = isDarkMode;
-
-  onDestroy(() => {
-    unsubscribeRightShift();
-  });
 </script>
 
 <div class="keyboard" class:dark={dark}>

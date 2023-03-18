@@ -21,6 +21,10 @@
   let rightShift: number;
   $: rightShift = $rightShiftContext;
 
+  const pressedKeyContext = getContext<Writable<string>>('pressedKey');
+  let isPressed: boolean;
+  $: isPressed = button.key === $pressedKeyContext;
+
   const display = button.display;
   const latin = button.latin;
   $: taitham = button.getCurrentTaitham(rightShift);
@@ -47,11 +51,15 @@
 </script>
 
 <button
-type="button"
-class="btn btn-outline-secondary {darkMode ? 'text-light' : 'text-dark'} {button.key === 'RightShift' && rightShift > 0 ? 'bg-danger': ''}"
-class:dark={darkMode}
-style:width="{button.width}%"
-on:click={onClick}
+  type="button"
+  class="btn btn-outline-secondary"
+  class:text-light={darkMode && !isPressed}
+  class:text-dark={!darkMode && !isPressed}
+  class:bg-secondary={isPressed}
+  class:bg-danger={button.key === 'RightShift' && rightShift > 0}
+  class:dark={darkMode}
+  style:width="{button.width}%"
+  on:click={onClick}
 >
   {#if display}
     <span>
