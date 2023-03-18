@@ -13,19 +13,19 @@
   <div class="d-inline-flex" style="width: 7%;">&nbsp;</div>
 {/if}
 {#if index == 3}<VirtualKeyboardButton
-  button={KeyboardButton.getSpecialKey(SPECIAL_KEYS.LEFT_SHIFT)}
+  button={KeyboardButton.getSpecialKey(SPECIAL_KEYS.LEFT_SHIFT)} on:insert on:backspace
 />{/if}<!--
 -->{#each row as button}<VirtualKeyboardButton
-  {button}
+  {button} on:insert on:backspace
 />{/each}<!--
 -->{#if index == 0}<VirtualKeyboardButton
-  button={KeyboardButton.getSpecialKey(SPECIAL_KEYS.BACKSPACE)}
+  button={KeyboardButton.getSpecialKey(SPECIAL_KEYS.BACKSPACE)} on:insert on:backspace
 />{:else if index == 2}<VirtualKeyboardButton
-  button={KeyboardButton.getSpecialKey(SPECIAL_KEYS.ENTER)}
+  button={KeyboardButton.getSpecialKey(SPECIAL_KEYS.ENTER)} on:insert on:backspace
 />{:else if index == 3}<VirtualKeyboardButton
-  button={KeyboardButton.getSpecialKey(SPECIAL_KEYS.RIGHT_SHIFT)}
+  button={KeyboardButton.getSpecialKey(SPECIAL_KEYS.RIGHT_SHIFT)} on:insert on:backspace
 />{:else if index == 4}<VirtualKeyboardButton
-  button={KeyboardButton.getSpecialKey(SPECIAL_KEYS.SPACEBAR)}
+  button={KeyboardButton.getSpecialKey(SPECIAL_KEYS.SPACEBAR)} on:insert on:backspace
 /><VirtualKeyboardButton
-  button={KeyboardButton.getSpecialKey(SPECIAL_KEYS.RIGHT_ALT)}
+  button={KeyboardButton.getSpecialKey(SPECIAL_KEYS.RIGHT_ALT)} on:insert on:backspace
 />{/if}

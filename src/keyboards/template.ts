@@ -20,7 +20,8 @@ export type KeyboardButtonOptions = {
   display?: string
   taitham?: string[],
   taithamShifted?: string[],
-  width?: number
+  width?: number,
+  special?: boolean
 };
 
 export class KeyboardButton {
@@ -31,6 +32,7 @@ export class KeyboardButton {
   public readonly taitham: string[];
   public readonly taithamShifted: string[];
   public readonly width: number;
+  public readonly special: boolean;
 
   private constructor (options: KeyboardButtonOptions) {
     this.key = options.key ?? '';
@@ -40,6 +42,7 @@ export class KeyboardButton {
     this.taitham = options.taitham ?? [];
     this.taithamShifted = options.taithamShifted ?? [];
     this.width = options.width ?? 7;
+    this.special = options.special ?? false;
   }
 
   public getCurrentTaitham(rShiftCount: number = 0): string {
@@ -85,7 +88,7 @@ export class KeyboardButton {
   }
 
   public static getSpecialKey(key: SpecialKey): KeyboardButton {
-    return new KeyboardButton({ key: key.key, display: key.display, width: key.width });
+    return new KeyboardButton({ key: key.key, display: key.display, width: key.width, special: true });
   }
 };
 

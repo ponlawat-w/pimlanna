@@ -1,33 +1,73 @@
 <script lang="ts">
-  import { isDarkMode } from "../stores/theme";
-  import type { KeyboardButton } from "./template";
+  import { createEventDispatcher, getContext } from 'svelte';
+  import { isDarkMode } from '../stores/theme';
+  import { KeyboardSource, type KeyboardEvents } from './events';
+  import Characters from 'lanna-utils/dist/resources/characters';
+  import type { KeyboardButton, SpecialButtonKey } from './template';
+  import type { Writable } from 'svelte/store';
 
   export let button: KeyboardButton;
+  const dispatch = createEventDispatcher<KeyboardEvents>();
+
+  const source = KeyboardSource.Virtual;
 
   $: darkMode = $isDarkMode;
 
+  const leftShiftContext = getContext<Writable<boolean>>('leftShift');
+  let leftShift: boolean;
+  $: leftShift = $leftShiftContext;
+
+  const rightShiftContext = getContext<Writable<number>>('rightShift');
+  let rightShift: number;
+  $: rightShift = $rightShiftContext;
+
   const display = button.display;
   const latin = button.latin;
-  $: taitham = button.getCurrentTaitham();
-  $: taithamShifted = button.getCurrentShiftedTaitham();
-  $: current = button.getCurrent();
+  $: taitham = button.getCurrentTaitham(rightShift);
+  $: taithamShifted = button.getCurrentShiftedTaitham(rightShift);
+  $: current = button.getCurrent(leftShift, rightShift);
+
+  const onClick = () => {
+    if (!button) {
+      return;
+    }
+    if (button.special) {
+      const key = button.key as SpecialButtonKey;
+      switch (key) {
+        case 'Backspace': return dispatch('backspace', source);
+        case 'Enter': return dispatch('insert', { character: '\n', source });
+        case 'LeftShift': return leftShiftContext.update(x => !x);
+        case 'RightAlt': return dispatch('insert', { character: Characters.signSakot, source });
+        case 'RightShift': return rightShiftContext.update(x => x + 1);
+        case 'Spacebar': return dispatch('insert', { character: ' ', source });
+      }
+    }
+    return dispatch('insert', { character: current, source });
+  };
 </script>
 
 <button
-  type="button"
-  class="btn btn-outline-secondary {darkMode ? 'text-light' : 'text-dark'}"
-  style:width="{button.width}%"
+type="button"
+class="btn btn-outline-secondary {darkMode ? 'text-light' : 'text-dark'} {button.key === 'RightShift' && rightShift > 0 ? 'bg-danger': ''}"
+class:dark={darkMode}
+style:width="{button.width}%"
+on:click={onClick}
 >
   {#if display}
-    {display}
+    <span>
+      {display}
+      {#if button.key === 'RightShift' && rightShift > 0}
+        {rightShift}
+      {/if}
+    </span>
   {:else}
-    <span class="latin d-none d-lg-block">
+    <span class="latin d-none d-lg-block text-secondary">
       {latin}
     </span>
-    <span class="taitham d-none d-lg-block">
+    <span class="taitham d-none d-lg-block {leftShift ? 'text-secondary' : ''}">
       {taitham}
     </span>
-    <span class="taitham-shifted d-none d-lg-block">
+    <span class="taitham-shifted d-none d-lg-block {!leftShift ? 'text-secondary' : ''}">
       {taithamShifted}
     </span>
     <span class="taitham-small d-block d-lg-none">
@@ -45,6 +85,20 @@
     padding: 0;
     height: 2em;
     touch-action: manipulation;
+    border-radius: 0;
+    background-color: #e0e0e0;
+  }
+
+  button.dark {
+    background-color: #151515;
+  }
+
+  button.dark:hover {
+    background-color: #606060;
+  }
+
+  button.dark:active {
+    background-color: #060606;
   }
 
   @media (max-width: 575.98px) {
