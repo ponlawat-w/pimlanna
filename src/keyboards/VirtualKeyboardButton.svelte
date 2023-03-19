@@ -53,7 +53,7 @@
 <button
   type="button"
   class="btn btn-outline-secondary"
-  class:text-light={darkMode && !isPressed}
+  class:text-light={(darkMode && !isPressed) || (!darkMode && isPressed)}
   class:text-dark={!darkMode && !isPressed}
   class:bg-secondary={isPressed}
   class:bg-danger={button.key === 'RightShift' && rightShift > 0}
@@ -62,7 +62,7 @@
   on:click={onClick}
 >
   {#if display}
-    <span>
+    <span class:text-light={button.key === 'RightShift' && rightShift > 0}>
       {display}
       {#if button.key === 'RightShift' && rightShift > 0}
         {rightShift}
@@ -97,6 +97,14 @@
     background-color: #e0e0e0;
   }
 
+  button:hover {
+    background-color: #d0d0d0;
+  }
+
+  button:active {
+    background-color: #c4c4c4;
+  }
+
   button.dark {
     background-color: #151515;
   }
@@ -117,7 +125,8 @@
 
   @media (min-width: 992px) {
     button {
-      height: 4em;
+      font-size: 0.85em;
+      height: 3.8em;
     }
   }
 

@@ -26,7 +26,7 @@
     rightShiftWritable.set(0);
   };
 
-  $: dark = isDarkMode;
+  $: dark = $isDarkMode;
 </script>
 
 <div class="keyboard" class:dark={dark}>
@@ -42,6 +42,7 @@
     bottom: 0;
     background-color: #ededed;
     box-shadow: 0 -5px 20px #000000;
+    background-color: #efefef;
   }
 
   .keyboard.dark {
