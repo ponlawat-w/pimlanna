@@ -1,6 +1,6 @@
 import type { InputLayout } from './layout';
 import type { KeyMapping } from './mapping';
-import Characters from 'lanna-utils/dist/resources/characters';
+import { Characters } from 'lanna-utils';
 
 export type SpecialButtonKey = 'Backspace'|'Enter'|'LeftShift'|'RightShift'|'Spacebar'|'RightAlt';
 export type SpecialKey = { key: SpecialButtonKey, display: string, width?: number };

@@ -1,4 +1,4 @@
-import Characters from 'lanna-utils/dist/resources/characters';
+import { Characters } from 'lanna-utils';
 import type { KeyMapping } from '../mapping';
 
 export default [

@@ -2,7 +2,7 @@
   import { createEventDispatcher, getContext } from 'svelte';
   import { isDarkMode } from '../stores/theme';
   import { KeyboardSource, type KeyboardEvents } from './events';
-  import Characters from 'lanna-utils/dist/resources/characters';
+  import { Characters } from 'lanna-utils';
   import type { KeyboardButton, SpecialButtonKey } from './template';
   import type { Writable } from 'svelte/store';
 

@@ -2,7 +2,7 @@
   import { getKeyDict, type KeyDict } from './keyboards/mapping';
   import { isDarkMode } from './stores/theme';
   import { KeyboardSource, type InsertCharacterEvent } from './keyboards/events';
-  import Characters from 'lanna-utils/dist/resources/characters';
+  import { Characters } from 'lanna-utils';
   import DefaultKeyMappings from './keyboards/mappings/default';
   import Keyboard from './keyboards/Keyboard.svelte';
   import { writable, type Writable } from 'svelte/store';
