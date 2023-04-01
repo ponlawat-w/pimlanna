@@ -77,6 +77,10 @@
   const onInsert = (event: CustomEvent<InsertCharacterEvent>) => insert(event.detail);
   const onBackspace = (event: CustomEvent<KeyboardSource>) => backspace(event.detail);
 
+  const isLeftShift = (event: KeyboardEvent) => event.key === 'Shift' && (event.location === 1);
+  const isRightShift = (event: KeyboardEvent) => event.key === 'Shift' && (event.location === 0 || event.location === 2);
+  const isRightAlt = (event: KeyboardEvent) => (event.key === 'Alt' || event.key === 'AltGraph') && event.location === 2;
+
   const onKeyPress = (event: KeyboardEvent) => {
     const key = event.key;
     if (!keyDict[key] || !keyDict[key][rightShiftCount]) {
@@ -85,10 +89,6 @@
     event.preventDefault();
     insert({ character: keyDict[key][rightShiftCount], source: KeyboardSource.Physical });
   };
-
-  const isLeftShift = (event: KeyboardEvent) => event.key === 'Shift' && (event.location === 1);
-  const isRightShift = (event: KeyboardEvent) => event.key === 'Shift' && (event.location === 0 || event.location === 2);
-  const isRightAlt = (event: KeyboardEvent) => (event.key === 'Alt' || event.key === 'AltGraph') && event.location === 2;
 
   const onKeyDown = (event: KeyboardEvent) => {
     if (isLeftShift(event)) {

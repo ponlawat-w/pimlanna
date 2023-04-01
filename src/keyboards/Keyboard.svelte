@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onDestroy, setContext } from 'svelte';
+  import { setContext } from 'svelte';
   import { writable, type Writable } from 'svelte/store';
   import { isDarkMode } from '../stores/theme';
   import type { KeyMapping } from './mapping';

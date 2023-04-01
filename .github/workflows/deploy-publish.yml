@@ -1,9 +1,9 @@
 name: Deploy and Publish Svelte App
-on:
-  push:
-    branches:
-      - svelte
-  workflow_dispatch:
+on: []
+  # push:
+  #   branches:
+  #     - svelte
+  # workflow_dispatch:
 jobs:
   deploy:
     name: Build and publish
