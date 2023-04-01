@@ -1,4 +1,4 @@
-name: Deploy on Github Pages
+name: Deploy and Publish Svelte App
 on: workflow_dispatch
 jobs:
   deploy:
