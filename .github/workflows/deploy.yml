@@ -1,6 +1,5 @@
 name: Deploy on Github Pages
-on:
-  workflow_call:
+on: workflow_dispatch
 jobs:
   deploy:
     name: Build and publish
