@@ -9,7 +9,7 @@
   export let leftShift: boolean;
   export let rightShiftCount: number;
 
-  let maxRightShift: number = 0;
+  let maxRightShift: number;
   $: maxRightShift = keyMappings.reduce<number>((prev, curr) => curr.rShiftCount > prev ? curr.rShiftCount : prev, 0);
 
   const leftShiftWritable = writable<boolean>(false);

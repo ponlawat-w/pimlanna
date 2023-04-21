@@ -21,9 +21,9 @@
   let rightShift: number;
   $: rightShift = $rightShiftContext;
 
-  const pressedKeyContext = getContext<Writable<string>>('pressedKey');
+  const pressedKeyContext = getContext<Writable<string[]>>('pressedKeys');
   let isPressed: boolean;
-  $: isPressed = button.key === $pressedKeyContext;
+  $: isPressed = $pressedKeyContext.indexOf(button.key) > -1 || $pressedKeyContext.indexOf(button.keyShifted) > -1;
 
   const display = button.display;
   const latin = button.latin;
@@ -43,7 +43,7 @@
         case 'LeftShift': return leftShiftContext.update(x => !x);
         case 'RightAlt': return dispatch('insert', { character: Characters.signSakot, source });
         case 'RightShift': return rightShiftContext.update(x => x + 1);
-        case 'Spacebar': return dispatch('insert', { character: ' ', source });
+        case ' ': return dispatch('insert', { character: ' ', source });
       }
     }
     return dispatch('insert', { character: current, source });

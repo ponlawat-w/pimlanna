@@ -2,14 +2,14 @@ import type { InputLayout } from './layout';
 import type { KeyMapping } from './mapping';
 import { Characters } from 'lanna-utils';
 
-export type SpecialButtonKey = 'Backspace'|'Enter'|'LeftShift'|'RightShift'|'Spacebar'|'RightAlt';
+export type SpecialButtonKey = 'Backspace'|'Enter'|'LeftShift'|'RightShift'|' '|'RightAlt';
 export type SpecialKey = { key: SpecialButtonKey, display: string, width?: number };
 export const SPECIAL_KEYS: {[name: string]: SpecialKey} = {
   BACKSPACE: { key: 'Backspace', display: '←', width: 10 },
   ENTER: { key: 'Enter', display: '↲', width: 10 },
   LEFT_SHIFT: { key: 'LeftShift', display: '↑', width: 12 },
   RIGHT_SHIFT: { key: 'RightShift', display: '※', width: 12 },
-  SPACEBAR: { key: 'Spacebar', display: '', width: 48 },
+  SPACEBAR: { key: ' ', display: '', width: 48 },
   RIGHT_ALT: { key: 'RightAlt', display: Characters.signSakot }
 };
 

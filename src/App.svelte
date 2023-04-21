@@ -24,8 +24,8 @@
   let selectionStart: number = 0;
   let selectionEnd: number = 0;
 
-  const pressedKeyWritable: Writable<string> = writable();
-  setContext('pressedKey', pressedKeyWritable);
+  const pressedKeysWritable: Writable<string[]> = writable([]);
+  setContext('pressedKeys', pressedKeysWritable);
 
   const getSelection = (source: KeyboardSource): { selectionStart: number, selectionEnd: number } => {
     if (source === KeyboardSource.Physical) {
@@ -90,31 +90,51 @@
     insert({ character: keyDict[key][rightShiftCount], source: KeyboardSource.Physical });
   };
 
+  let pressedCount: number = 0;
+
   const onKeyDown = (event: KeyboardEvent) => {
+    pressedCount++;
+    let key: string;
     if (isLeftShift(event)) {
+      key = 'LeftShift';
       leftShift = true;
-      pressedKeyWritable.set('LeftShift');
     } else if (isRightShift(event)) {
-      pressedKeyWritable.set('RightShift');
+      key = 'RightShift';
     } else if (isRightAlt(event)) {
-      pressedKeyWritable.set('RightAlt');
+      key = 'RightAlt';
     } else {
-      pressedKeyWritable.set(event.key);
+      key = event.key;
+    }
+
+    if (key) {
+      pressedKeysWritable.update(x => [...x, key]);
     }
   };
 
   const onKeyUp = (event: KeyboardEvent) => {
+    pressedCount--;
+    let key: string;
     if (isLeftShift(event)) {
+      key = 'LeftShift';
       leftShift = false;
     } else if (isRightShift(event)) {
+      key = 'RightShift';
       event.preventDefault();
       rightShiftCount++;
     } else if (isRightAlt(event)) {
+      key = 'RightAlt';
       event.preventDefault();
       insert({ character: Characters.signSakot, source: KeyboardSource.Physical });
+    } else {
+      key = event.key;
     }
-    pressedKeyWritable.set(null);
     updateSelection();
+
+    if (!pressedCount) {
+      pressedKeysWritable.update(x => []);
+    } else if (key) {
+      pressedKeysWritable.update(x => x.filter(x => x !== key));
+    }
   };
 </script>
 
