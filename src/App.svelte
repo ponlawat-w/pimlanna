@@ -7,6 +7,7 @@
   import Keyboard from './keyboards/Keyboard.svelte';
   import { writable, type Writable } from 'svelte/store';
   import { setContext } from 'svelte';
+    import type { SuggestionEvent } from './keyboards/suggestions';
 
   $: dark = $isDarkMode;
   $: document.body.className = dark ? 'bg-dark text-light' : 'bg-light text-dark';
@@ -85,13 +86,17 @@
     applyNewSelection(newSelection, newSelection, source);
   }
 
-  const suggested = (event: CustomEvent<string>) => {
+  const suggested = (event: CustomEvent<SuggestionEvent>) => {
     textarea.value = textarea.value.substring(0, suggestionSelectionStart)
-      + event.detail
+      + event.detail.text
       + textarea.value.substring(suggestionSelectionStart + suggestionInput.length, textarea.value.length);
     updateSelection(true);
     if (lastKeyboardSource === KeyboardSource.Physical) {
       textarea.focus();
+    }
+    pressedKeysWritable.set([]);
+    if (event.detail.keypress) {
+      onKeyPress(event.detail.keypress);
     }
   };
 
@@ -156,8 +161,15 @@
     const multiDeletion = keyDownOnMultiselection && (event.key === 'Backspace' || event.key === 'Delete');
     updateSelection(isArrow || multiDeletion);
 
+    if (
+      (event.key === ' ') ||
+      (event.key === 'Backspace' && suggestionSelectionStart > selectionStart)
+    ) {
+      suggestionSelectionStart = selectionStart;
+    }
+
     if (!pressedCount) {
-      pressedKeysWritable.update(() => []);
+      pressedKeysWritable.set([]);
     } else if (key) {
       pressedKeysWritable.update(x => x.filter(x => x !== key));
     }

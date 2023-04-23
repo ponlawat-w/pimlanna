@@ -4,7 +4,7 @@
   import { isDarkMode } from '../stores/theme';
   import type { KeyMapping } from './mapping';
   import VirtualKeyboard from './VirtualKeyboard.svelte';
-  import Suggestions from './suggestions/Suggestions.svelte';
+  import Suggestions from './Suggestions.svelte';
 
   export let keyMappings: KeyMapping[] = [];
   export let leftShift: boolean;
