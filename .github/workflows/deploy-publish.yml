@@ -2,7 +2,7 @@ name: Deploy and Publish Svelte App
 on:
   push:
     branches:
-      - svelte
+      - master
   workflow_dispatch:
 jobs:
   deploy:
