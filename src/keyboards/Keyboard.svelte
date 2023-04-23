@@ -4,13 +4,12 @@
   import { isDarkMode } from '../stores/theme';
   import type { KeyMapping } from './mapping';
   import VirtualKeyboard from './VirtualKeyboard.svelte';
+  import Suggestions from './suggestions/Suggestions.svelte';
 
   export let keyMappings: KeyMapping[] = [];
   export let leftShift: boolean;
   export let rightShiftCount: number;
-
-  let maxRightShift: number;
-  $: maxRightShift = keyMappings.reduce<number>((prev, curr) => curr.rShiftCount > prev ? curr.rShiftCount : prev, 0);
+  export let suggestionInput: string = '';
 
   const leftShiftWritable = writable<boolean>(false);
   setContext<Writable<boolean>>('leftShift', leftShiftWritable);
@@ -30,6 +29,7 @@
 </script>
 
 <div class="keyboard" class:dark={dark}>
+  <Suggestions input={suggestionInput} on:suggest />
   <VirtualKeyboard on:insert on:backspace {keyMappings}
     on:insert={resetShifts} on:backspace={resetShifts}  />
 </div>

@@ -23,6 +23,12 @@
 
   let selectionStart: number = 0;
   let selectionEnd: number = 0;
+  let keyDownOnMultiselection: boolean = false;
+  let lastKeyboardSource: KeyboardSource;
+
+  let suggestionSelectionStart: number = 0;
+  let suggestionInput: string = '';
+  $: suggestionInput = textarea ? textarea.value.substring(suggestionSelectionStart, selectionEnd) : '';
 
   const pressedKeysWritable: Writable<string[]> = writable([]);
   setContext('pressedKeys', pressedKeysWritable);
@@ -38,14 +44,18 @@
   const applyNewSelection = (start: number, end: number, source: KeyboardSource) => {
     selectionStart = start;
     selectionEnd = end;
+    lastKeyboardSource = source;
     if (source === KeyboardSource.Physical) {
       textarea.setSelectionRange(selectionStart, selectionEnd);
     }
   };
 
-  const updateSelection = () => {
+  const updateSelection = (resetSuggestion: boolean = false) => {
     selectionStart = textarea.selectionStart;
     selectionEnd = textarea.selectionEnd;
+    if (resetSuggestion) {
+      suggestionSelectionStart = selectionStart;
+    }
   };
 
   const insert = (event: InsertCharacterEvent) => {
@@ -57,6 +67,7 @@
       + event.character
       + textarea.value.substring(selectionEnd, textarea.value.length);
     applyNewSelection(selectionStart + event.character.length, selectionStart + event.character.length, event.source);
+    updateSelection(keyDownOnMultiselection);
     rightShiftCount = 0;
   };
 
@@ -73,6 +84,16 @@
       + textarea.value.substring(selectionEnd);
     applyNewSelection(newSelection, newSelection, source);
   }
+
+  const suggested = (event: CustomEvent<string>) => {
+    textarea.value = textarea.value.substring(0, suggestionSelectionStart)
+      + event.detail
+      + textarea.value.substring(suggestionSelectionStart + suggestionInput.length, textarea.value.length);
+    updateSelection(true);
+    if (lastKeyboardSource === KeyboardSource.Physical) {
+      textarea.focus();
+    }
+  };
 
   const onInsert = (event: CustomEvent<InsertCharacterEvent>) => insert(event.detail);
   const onBackspace = (event: CustomEvent<KeyboardSource>) => backspace(event.detail);
@@ -109,6 +130,8 @@
     if (key) {
       pressedKeysWritable.update(x => [...x, key]);
     }
+
+    keyDownOnMultiselection = selectionStart !== selectionEnd;
   };
 
   const onKeyUp = (event: KeyboardEvent) => {
@@ -128,10 +151,13 @@
     } else {
       key = event.key;
     }
-    updateSelection();
+
+    const isArrow = event.key.startsWith('Arrow');
+    const multiDeletion = keyDownOnMultiselection && (event.key === 'Backspace' || event.key === 'Delete');
+    updateSelection(isArrow || multiDeletion);
 
     if (!pressedCount) {
-      pressedKeysWritable.update(x => []);
+      pressedKeysWritable.update(() => []);
     } else if (key) {
       pressedKeysWritable.update(x => x.filter(x => x !== key));
     }
@@ -139,10 +165,11 @@
 </script>
 
 <textarea bind:this={textarea}
-  on:select={updateSelection} on:click={updateSelection}
+  on:select={() => updateSelection(false)} on:click={() => updateSelection(true)}
   on:keypress={onKeyPress} on:keydown={onKeyDown} on:keyup={onKeyUp}
   class="form-control {dark ? 'bg-dark text-light' : 'bg-light text-dark'}"
   style="height: 25vh;"></textarea>
 
 <Keyboard keyMappings={DefaultKeyMappings} on:insert={onInsert} on:backspace={onBackspace}
-  {leftShift} bind:rightShiftCount={rightShiftCount} />
+  on:suggest={suggested}
+  {suggestionInput} {leftShift} bind:rightShiftCount={rightShiftCount} />
