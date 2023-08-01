@@ -67,7 +67,7 @@ export default [
   { taitham: Characters.signMaiKangLai, key: 'ง', rShiftCount: 1 },
   { taitham: Characters.consonantSignFinalNga, key: 'ง', rShiftCount: 2 },
   { taitham: Characters.consonantSignLowPa, key: 'พ', rShiftCount: 2 },
-  { taitham: Characters.consonantSignHighRathaOrLowPa, key: '(' },
+  { taitham: Characters.consonantSignHighRathaOrLowPa, key: 'ฑ' },
   { taitham: Characters.consonantSignHighRathaOrLowPa, key: 'ฐ', rShiftCount: 1 },
   { taitham: Characters.consonantSignHighRathaOrLowPa, key: 'พ', rShiftCount: 1 },
   { taitham: Characters.consonantSignMa, key: 'ม', rShiftCount: 1 },
