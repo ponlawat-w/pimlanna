@@ -27,6 +27,7 @@
   let keyDownOnMultiselection: boolean = false;
   let lastKeyboardSource: KeyboardSource;
 
+  let suggestion: boolean = true;
   let suggestionSelectionStart: number = 0;
   let suggestionInput: string = '';
   $: suggestionInput = textarea ? textarea.value.substring(suggestionSelectionStart, selectionEnd) : '';
@@ -176,12 +177,18 @@
   };
 </script>
 
+<div class="form-check form-check-inline form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="suggestion-switch" bind:checked={suggestion}>
+  <label class="form-check-label" for="suggestion-switch">
+    ᨲ᩠ᩅᩫᨩ᩠ᩅ᩠᩵ᨿᨻᩥᨾᩛ᩺
+  </label>
+</div>
+
 <textarea bind:this={textarea}
   on:select={() => updateSelection(false)} on:click={() => updateSelection(true)}
   on:keypress={onKeyPress} on:keydown={onKeyDown} on:keyup={onKeyUp}
   class="form-control {dark ? 'bg-dark text-light' : 'bg-light text-dark'}"
   style="height: 25vh;"></textarea>
 
-<Keyboard keyMappings={DefaultKeyMappings} on:insert={onInsert} on:backspace={onBackspace}
-  on:suggest={suggested}
-  {suggestionInput} {leftShift} bind:rightShiftCount={rightShiftCount} />
+<Keyboard keyMappings={DefaultKeyMappings} on:insert={onInsert} on:backspace={onBackspace} on:suggest={suggested}
+  {suggestion} {suggestionInput} {leftShift} bind:rightShiftCount={rightShiftCount} />
