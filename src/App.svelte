@@ -8,6 +8,7 @@
   import { writable, type Writable } from 'svelte/store';
   import { setContext } from 'svelte';
     import type { SuggestionEvent } from './keyboards/suggestions';
+    import { text } from 'svelte/internal';
 
   $: dark = $isDarkMode;
   $: document.body.className = dark ? 'bg-dark text-light' : 'bg-light text-dark';
@@ -177,19 +178,33 @@
       pressedKeysWritable.update(x => x.filter(x => x !== key));
     }
   };
+
+  const copyText = () => {
+    if (!navigator.clipboard) {
+      return alert('Browser does not support clipboard function, please manually copy.');
+    }
+    navigator.clipboard.writeText(textarea.value);
+  };
 </script>
 
-<div class="form-check form-check-inline form-switch">
-  <input class="form-check-input" type="checkbox" role="switch" id="suggestion-switch" bind:checked={suggestion}>
-  <label class="form-check-label" for="suggestion-switch">
-    ᨲ᩠ᩅᩫᨩ᩠ᩅ᩠᩵ᨿᨻᩥᨾᩛ᩺
-  </label>
+<div class="float-start">
+  <div class="form-check form-check-inline form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="suggestion-switch" bind:checked={suggestion}>
+    <label class="form-check-label" for="suggestion-switch">
+      ᨲ᩠ᩅᩫᨩ᩠ᩅ᩠᩵ᨿᨻᩥᨾᩛ᩺
+    </label>
+  </div>
+  <div class="form-check form-check-inline form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="on-screen-switch" bind:checked={onScreenKeyboard}>
+    <label class="form-check-label" for="on-screen-switch">
+      ᨸᩯ᩠᩶ᨶᨷᩫ᩠ᨶᨧᩬᩴ
+    </label>
+  </div>
 </div>
-<div class="form-check form-check-inline form-switch">
-  <input class="form-check-input" type="checkbox" role="switch" id="on-screen-switch" bind:checked={onScreenKeyboard}>
-  <label class="form-check-label" for="on-screen-switch">
-    ᨸᩯ᩠᩶ᨶᨷᩫ᩠ᨶᨧᩬᩴ
-  </label>
+<div class="float-end">
+  <button class="btn btn-sm btn-outline-success" on:click={copyText}>
+    ᨣᩬ᩶ᨷᨸᩦ᩶
+  </button>
 </div>
 
 <textarea bind:this={textarea}
