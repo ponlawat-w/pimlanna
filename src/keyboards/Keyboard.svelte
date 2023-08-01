@@ -8,7 +8,9 @@
 
   export let keyMappings: KeyMapping[] = [];
   export let leftShift: boolean;
+  export let onScreenKeyboard: boolean = true;
   export let rightShiftCount: number;
+  export let suggestion: boolean = true;
   export let suggestionInput: string = '';
 
   const leftShiftWritable = writable<boolean>(false);
@@ -29,9 +31,11 @@
 </script>
 
 <div class="keyboard" class:dark={dark}>
-  <Suggestions input={suggestionInput} on:suggest />
-  <VirtualKeyboard on:insert on:backspace {keyMappings}
-    on:insert={resetShifts} on:backspace={resetShifts}  />
+  {#if suggestion}<Suggestions input={suggestionInput} on:suggest />{/if}
+  {#if onScreenKeyboard}
+    <VirtualKeyboard on:insert on:backspace {keyMappings}
+      on:insert={resetShifts} on:backspace={resetShifts}  />
+  {/if}
 </div>
 
 <style>
