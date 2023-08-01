@@ -8,6 +8,7 @@
 
   export let keyMappings: KeyMapping[] = [];
   export let leftShift: boolean;
+  export let onScreenKeyboard: boolean = true;
   export let rightShiftCount: number;
   export let suggestion: boolean = true;
   export let suggestionInput: string = '';
@@ -31,8 +32,10 @@
 
 <div class="keyboard" class:dark={dark}>
   {#if suggestion}<Suggestions input={suggestionInput} on:suggest />{/if}
-  <VirtualKeyboard on:insert on:backspace {keyMappings}
-    on:insert={resetShifts} on:backspace={resetShifts}  />
+  {#if onScreenKeyboard}
+    <VirtualKeyboard on:insert on:backspace {keyMappings}
+      on:insert={resetShifts} on:backspace={resetShifts}  />
+  {/if}
 </div>
 
 <style>

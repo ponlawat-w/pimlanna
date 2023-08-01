@@ -32,6 +32,8 @@
   let suggestionInput: string = '';
   $: suggestionInput = textarea ? textarea.value.substring(suggestionSelectionStart, selectionEnd) : '';
 
+  let onScreenKeyboard: boolean = true;
+
   const pressedKeysWritable: Writable<string[]> = writable([]);
   setContext('pressedKeys', pressedKeysWritable);
 
@@ -183,6 +185,12 @@
     ᨲ᩠ᩅᩫᨩ᩠ᩅ᩠᩵ᨿᨻᩥᨾᩛ᩺
   </label>
 </div>
+<div class="form-check form-check-inline form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="on-screen-switch" bind:checked={onScreenKeyboard}>
+  <label class="form-check-label" for="on-screen-switch">
+    ᨸᩯ᩠᩶ᨶᨷᩫ᩠ᨶᨧᩬᩴ
+  </label>
+</div>
 
 <textarea bind:this={textarea}
   on:select={() => updateSelection(false)} on:click={() => updateSelection(true)}
@@ -191,4 +199,4 @@
   style="height: 25vh;"></textarea>
 
 <Keyboard keyMappings={DefaultKeyMappings} on:insert={onInsert} on:backspace={onBackspace} on:suggest={suggested}
-  {suggestion} {suggestionInput} {leftShift} bind:rightShiftCount={rightShiftCount} />
+  {onScreenKeyboard} {suggestion} {suggestionInput} {leftShift} bind:rightShiftCount={rightShiftCount} />
