@@ -1,14 +1,13 @@
 <script lang="ts">
+  import { Characters } from 'lanna-utils';
   import { getKeyDict, type KeyDict } from './keyboards/mapping';
   import { isDarkMode } from './stores/theme';
   import { KeyboardSource, type InsertCharacterEvent } from './keyboards/events';
-  import { Characters } from 'lanna-utils';
+  import { onMount, setContext } from 'svelte';
+  import { writable, type Writable } from 'svelte/store';
   import DefaultKeyMappings from './keyboards/mappings/default';
   import Keyboard from './keyboards/Keyboard.svelte';
-  import { writable, type Writable } from 'svelte/store';
-  import { setContext } from 'svelte';
-    import type { SuggestionEvent } from './keyboards/suggestions';
-    import { text } from 'svelte/internal';
+  import type { SuggestionEvent } from './keyboards/suggestions';
 
   $: dark = $isDarkMode;
   $: document.body.className = dark ? 'bg-dark text-light' : 'bg-light text-dark';
@@ -185,6 +184,10 @@
     }
     navigator.clipboard.writeText(textarea.value);
   };
+
+  onMount(() => {
+    textarea.focus();
+  });
 </script>
 
 <div class="float-start">
