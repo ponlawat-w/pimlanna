@@ -205,7 +205,7 @@
   </div>
 </div>
 <div class="float-end">
-  <button class="btn btn-sm btn-outline-success" on:click={copyText}>
+  <button class="btn btn-sm btn-outline-success" tabindex="-1" on:click={copyText}>
     ᨣᩬ᩶ᨷᨸᩦ᩶
   </button>
 </div>
