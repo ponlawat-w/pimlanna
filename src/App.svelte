@@ -166,6 +166,7 @@
 
     if (
       (event.key === ' ') ||
+      (event.key === 'Enter') ||
       (event.key === 'Backspace' && suggestionSelectionStart > selectionStart)
     ) {
       suggestionSelectionStart = selectionStart;
