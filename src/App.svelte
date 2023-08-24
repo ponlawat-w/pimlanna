@@ -172,7 +172,7 @@
       suggestionSelectionStart = selectionStart;
     }
 
-    if (!pressedCount) {
+    if (!pressedCount || key === 'LeftShift' || key === 'RightShift') {
       pressedKeysWritable.set([]);
     } else if (key) {
       pressedKeysWritable.update(x => x.filter(x => x !== key));
@@ -213,6 +213,7 @@
 
 <textarea bind:this={textarea}
   on:select={() => updateSelection(false)} on:click={() => updateSelection(true)}
+  on:blur={() => pressedKeysWritable.set([])}
   on:keypress={onKeyPress} on:keydown={onKeyDown} on:keyup={onKeyUp}
   class="form-control {dark ? 'bg-dark text-light' : 'bg-light text-dark'}"
   style="height: 25vh;"></textarea>
