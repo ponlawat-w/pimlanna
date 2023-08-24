@@ -49,11 +49,16 @@ export default [
   { taitham: Characters.letterA, key: 'อ' },
   { taitham: Characters.letterLowHa, key: 'ฮ' },
   { taitham: Characters.letterI, key: 'ิ', rShiftCount: 1 },
+  { taitham: Characters.letterI, key: 'ฺ' },
   { taitham: Characters.letterIi, key: 'ี', rShiftCount: 1 },
   { taitham: Characters.letterU, key: 'ุ', rShiftCount: 1 },
+  { taitham: Characters.letterU, key: '-' },
   { taitham: Characters.letterUu, key: 'ู', rShiftCount: 1 },
+  { taitham: Characters.letterUu, key: '฿' },
   { taitham: Characters.letterEe, key: 'เ', rShiftCount: 1 },
+  { taitham: Characters.letterEe, key: '?' },
   { taitham: Characters.letterOo, key: 'โ', rShiftCount: 1 },
+  { taitham: Characters.letterOo, key: '/' },
   { taitham: Characters.letterLae, key: ',' },
   { taitham: Characters.letterLae, key: 'ล', rShiftCount: 1 },
   { taitham: Characters.letterGreatSa, key: '.' },
@@ -138,5 +143,6 @@ export default [
   { taitham: Characters.signSatkaan, key: 'ฯ' },
   { taitham: Characters.signSatkaankuu, key: 'ฯ', rShiftCount: 1 },
   { taitham: Characters.signHang, key: 'ห', rShiftCount: 2 },
-  { taitham: Characters.signCaang, key: 'ช', rShiftCount: 1 }
+  { taitham: Characters.signCaang, key: 'ช', rShiftCount: 1 },
+  { taitham: Characters.signCaang, key: '+' }
 ] as KeyMapping[];
